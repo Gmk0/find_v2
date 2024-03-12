@@ -29,11 +29,13 @@ class ChatController extends GetxController {
         conversation.value = responseData
             .map((data) => ConversationModel.fromJson(data))
             .toList();
+
+        print(conversation);
       } else {
         print('Erreur lors de la récupération des données');
       }
     } catch (e) {
-      print(e.toString());
+      print('les erreurs' + e.toString());
     }
   }
 }

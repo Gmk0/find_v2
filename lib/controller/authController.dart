@@ -18,8 +18,17 @@ class AuthController extends GetxController {
   TextEditingController parainage = TextEditingController();
   TextEditingController terms = TextEditingController();
 
-  var user = UserModel('', '', '', '', '', '', '', '', '').obs;
-
+  var user = UserModel(
+    id: '',
+    name: '',
+    email: '',
+    phone: '',
+    slug: '',
+    referralCode: '',
+    emailVerifiedAt: '',
+    profilePhotoPath: '',
+    lastActivity: '',
+  ).obs;
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   Future<void> login() async {

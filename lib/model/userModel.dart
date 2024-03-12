@@ -5,33 +5,33 @@ class UserModel {
   late String slug;
   late String emailVerifiedAt;
   late String phone;
-  late String referenceCode;
+  late String referralCode;
   late String profilePhotoPath;
   late String lastActivity;
 
   UserModel(
-      this.id,
-      this.name,
-      this.email,
-      this.phone,
-      this.slug,
-      this.referenceCode,
-      this.emailVerifiedAt,
-      this.profilePhotoPath,
-      this.lastActivity);
+      {required this.id,
+      required this.name,
+      required this.email,
+      required this.phone,
+      required this.slug,
+      required this.referralCode,
+      required this.emailVerifiedAt,
+      required this.profilePhotoPath,
+      required this.lastActivity});
 
   // Méthode pour créer une instance de UserModel à partir des données JSON
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
-      json['id'].toString(),
-      json['name'].toString(),
-      json['email'].toString(),
-      json['phone'].toString(),
-      json['slug'].toString(),
-      json['referenceCode'].toString(),
-      json['emailVerifiedAt'].toString(),
-      json['profilePhotoPath'].toString(),
-      json['lastActivity'].toString(),
+      id: json['id'].toString(),
+      name: json['name'].toString(),
+      email: json['email'].toString(),
+      phone: json['phone'].toString(),
+      slug: json['slug'].toString(),
+      referralCode: json['referral_code'].toString(),
+      emailVerifiedAt: json['email_verified_at'].toString(),
+      profilePhotoPath: json['profile_photo_path'].toString(),
+      lastActivity: json['last_activity'].toString(),
     );
   }
 
@@ -43,7 +43,7 @@ class UserModel {
       'email': email,
       'phone': phone,
       'slug': slug,
-      'referenceCode': referenceCode,
+      'referralCode': referralCode,
       'emailVerifiedAt': emailVerifiedAt,
       'profilePhotoPath': profilePhotoPath,
       'lastActivity': lastActivity
