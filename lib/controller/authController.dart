@@ -28,7 +28,9 @@ class AuthController extends GetxController {
     emailVerifiedAt: '',
     profilePhotoPath: '',
     lastActivity: '',
+    isOnline: true,
   ).obs;
+
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   Future<void> login() async {

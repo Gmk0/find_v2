@@ -59,4 +59,5 @@ class _FreelanceEndPoints {
 
 class _ConversationEndPoints {
   final String allConversation = 'getUserConversations';
+  final String sendMessage = 'SendMessage';
 }

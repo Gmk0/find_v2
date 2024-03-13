@@ -8,11 +8,14 @@ class ConversationModel {
   late String status;
   late String id;
   late bool is_blocked;
+  late DateTime last_time_message;
   // ignore: non_constant_identifier_names
   late String created_at;
   late UserModel user; // Relation avec le modèle UserModel
   late FreelanceModel freelance;
-  late MessageModel? lastMessage; // Relation avec le modèle FreelanceModel
+  late UserModel freelanceUser;
+  late MessageModel? lastMessage;
+  late List<MessageModel>? allMessages;
 
   ConversationModel(
       {required this.freelance_id,
@@ -23,6 +26,9 @@ class ConversationModel {
       required this.user,
       required this.freelance,
       required this.created_at,
+      required this.freelanceUser,
+      required this.last_time_message,
+      this.allMessages,
       this.lastMessage});
 
   // Méthode de conversion JSON en objet ConversationModel
@@ -30,12 +36,17 @@ class ConversationModel {
     return ConversationModel(
         freelance_id: json['freelance_id'],
         user_id: json['user_id'],
+        last_time_message: DateTime.parse(json['last_time_message']),
         status: json['status'],
         id: json['id'],
         is_blocked: json['is_blocked'],
         created_at: json['created_at'],
-        user:
-            UserModel.fromJson(json['user']), // Convertir le JSON en UserModel
+        allMessages: (json['allMessages'] as List<dynamic>?)
+            ?.map((message) => MessageModel.fromJson(message))
+            .toList(),
+        user: UserModel.fromJson(json['user']),
+        freelanceUser: UserModel.fromJson(
+            json['freelanceUser']), // Convertir le JSON en UserModel
         freelance: FreelanceModel.fromJson(json['freelance']),
         lastMessage: MessageModel.fromJson(
             json['lastMessage']) // Convertir le JSON en FreelanceModel

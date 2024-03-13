@@ -9,19 +9,21 @@ class MessageModel {
   String? serviceId;
   String? orderId;
   String? proposalId;
+  DateTime created_at;
 
-  MessageModel({
-    required this.senderId,
-    required this.receiverId,
-    required this.conversationId,
-    this.body,
-    required this.isRead,
-    //this.file,
-    //required this.type,
-    //this.serviceId,
-    //this.orderId,
-    //  this.proposalId,
-  });
+  MessageModel(
+      {required this.senderId,
+      required this.receiverId,
+      required this.conversationId,
+      this.body,
+      required this.isRead,
+      required this.created_at
+      //this.file,
+      //required this.type,
+      //this.serviceId,
+      //this.orderId,
+      //  this.proposalId,
+      });
 
   factory MessageModel.fromJson(Map<String, dynamic> json) {
     return MessageModel(
@@ -30,6 +32,7 @@ class MessageModel {
       conversationId: json['conversation_id'],
       body: json['body'],
       isRead: json['is_read'],
+      created_at: DateTime.parse(json['created_at']),
       //file: json['file'],
       // type: json['type'],
       //serviceId: json['service_id'],

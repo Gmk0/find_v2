@@ -67,7 +67,7 @@ class _ChatPageState extends State<ChatPage> {
               ),
             ),
           ),
-          ChatListComponent(),
+          ChatList(),
         ],
       ),
     );
