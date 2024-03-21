@@ -2,6 +2,7 @@ import 'package:find_v2/components/appStyle.dart';
 import 'package:find_v2/components/netWorkImage.dart';
 import 'package:find_v2/components/reusableText.dart';
 import 'package:find_v2/controller/categoryController.dart';
+import 'package:find_v2/views/category/OneCategory.dart';
 import 'package:find_v2/views/category/allCategory.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -61,7 +62,8 @@ class CategorySwipper extends StatelessWidget {
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                   scrollDirection: Axis.horizontal,
                   itemBuilder: ((context, index) => GestureDetector(
-                        onTap: () => (),
+                        onTap: () => (Get.to(
+                            OneCategory(category: controller.category[index]))),
                         child: Column(
                           children: [
                             Padding(

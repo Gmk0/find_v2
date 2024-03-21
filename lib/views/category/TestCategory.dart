@@ -1,46 +1,30 @@
-import 'package:find_v2/components/bottomNav.dart';
-import 'package:find_v2/components/buildServiceCard.dart';
-import 'package:find_v2/components/netWorkImage.dart';
 import 'package:find_v2/controller/ServiceController.dart';
-import 'package:find_v2/model/categoryMode.dart';
-import 'package:find_v2/model/serviceModel.dart';
-import 'package:find_v2/utils/assets.dart';
 import 'package:find_v2/utils/theme.dart';
 import 'package:find_v2/utils/theme2.dart';
-import 'package:find_v2/views/category/TestCategory.dart';
 import 'package:find_v2/views/category/widgets/FilterScreen.dart';
 import 'package:find_v2/views/category/widgets/ServiceListeView.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
-import 'widgets/_SliverAppBarDelegate.dart';
-
-class OneCategory extends StatefulWidget {
-  const OneCategory({super.key, required this.category});
-
-  final CategoryModel category;
+class TestCategory extends StatefulWidget {
+  const TestCategory({Key? key}) : super(key: key);
 
   @override
-  State<OneCategory> createState() => _OneCategoryState();
+  _TestCategoryState createState() => _TestCategoryState();
 }
 
-class _OneCategoryState extends State<OneCategory>
+class _TestCategoryState extends State<TestCategory>
     with TickerProviderStateMixin {
   final ScrollController _scrollController = ScrollController();
+
   late final AnimationController animationController;
   final ServiceController serviceController = Get.find();
-  var servicesOhter;
-
   @override
   void initState() {
     super.initState();
-
     animationController = AnimationController(
         duration: const Duration(milliseconds: 1000), vsync: this);
-    servicesOhter = serviceController.getServicesByCategory(widget.category);
   }
 
   @override
@@ -87,43 +71,34 @@ class _OneCategoryState extends State<OneCategory>
                           pinned: true,
                           floating: true,
                           delegate: ContestTabHeader(
-                            getFilterBarUI(servicesOhter.length.toString()),
+                            getFilterBarUI(
+                                serviceController.serviceAll.length.toString()),
                           ),
                         ),
                       ];
                     },
                     body: Container(
-                        color:
-                            FindTheme.buildLightTheme().colorScheme.background,
-                        child: Obx(() {
-                          final services = serviceController
-                              .getServicesByCategory(widget.category);
-
-                          if (services.isEmpty) {
-                            return Container();
-                          } else {
-                            return ListView.builder(
-                              itemCount: services.length,
-                              padding: const EdgeInsets.only(top: 8),
-                              itemBuilder: (BuildContext context, int index) {
-                                final int count = services.length;
-                                final Animation<double> animation =
-                                    Tween<double>(begin: 0.0, end: 1.0).animate(
-                                        CurvedAnimation(
-                                            parent: animationController,
-                                            curve: Interval(
-                                                (1 / count) * index, 1.0,
-                                                curve: Curves.fastOutSlowIn)));
-                                animationController.forward();
-                                return ServiceListView(
-                                    service: services[index],
-                                    animationController: animationController,
-                                    animation: animation,
-                                    callback: () {});
-                              },
-                            );
-                          }
-                        })),
+                      color: FindTheme.buildLightTheme().colorScheme.background,
+                      child: ListView.builder(
+                        itemCount: serviceController.serviceAll.length,
+                        padding: const EdgeInsets.only(top: 8),
+                        itemBuilder: (BuildContext context, int index) {
+                          final int count = serviceController.serviceAll.length;
+                          final Animation<double> animation =
+                              Tween<double>(begin: 0.0, end: 1.0).animate(
+                                  CurvedAnimation(
+                                      parent: animationController,
+                                      curve: Interval((1 / count) * index, 1.0,
+                                          curve: Curves.fastOutSlowIn)));
+                          animationController.forward();
+                          return ServiceListView(
+                              service: serviceController.serviceAll[index],
+                              animationController: animationController,
+                              animation: animation,
+                              callback: () {});
+                        },
+                      ),
+                    ),
                   ),
                 )
               ],
@@ -164,13 +139,13 @@ class _OneCategoryState extends State<OneCategory>
                   ),
                 ),
               ),
-              Expanded(
+              const Expanded(
                 child: Center(
                   child: Text(
-                    widget.category.name,
+                    'Explore',
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
-                      fontSize: 18,
+                      fontSize: 22,
                     ),
                   ),
                 ),
@@ -371,5 +346,29 @@ class _OneCategoryState extends State<OneCategory>
         )
       ],
     );
+  }
+}
+
+class ContestTabHeader extends SliverPersistentHeaderDelegate {
+  ContestTabHeader(
+    this.searchUI,
+  );
+  final Widget searchUI;
+
+  @override
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return searchUI;
+  }
+
+  @override
+  double get maxExtent => 52.0;
+
+  @override
+  double get minExtent => 52.0;
+
+  @override
+  bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) {
+    return false;
   }
 }

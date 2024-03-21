@@ -2,6 +2,7 @@ import 'package:find_v2/components/bottomNav.dart';
 import 'package:find_v2/components/buildCategoryCard.dart';
 import 'package:find_v2/controller/categoryController.dart';
 import 'package:find_v2/model/categoryMode.dart';
+import 'package:find_v2/views/category/TestCategory.dart';
 import 'package:find_v2/views/category/oneSubCategory.dart';
 import 'package:find_v2/views/home/searchPageAll.dart';
 import 'package:flutter/material.dart';
@@ -86,7 +87,7 @@ class AllCategory extends GetView<CategoryController> {
           children: subCategories
               .map((subCategory) => GestureDetector(
                     onTap: () {
-                      Get.to(OneSubCategory(subCategoryModel: subCategory));
+                      Get.to(OneSubCategory(subcategory: subCategory));
                       // Gérer le clic sur la sous-catégorie ici
                     },
                     child: Card(
