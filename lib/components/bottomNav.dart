@@ -45,7 +45,7 @@ class BottomNav extends GetView<PageControllerView> {
                       margin: const EdgeInsets.all(5),
                       padding: const EdgeInsets.all(5),
                       decoration: BoxDecoration(
-                        color: Colors.grey.withOpacity(0.2),
+                        //color: Colors.grey.withOpacity(0.2),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: const Icon(
@@ -60,7 +60,7 @@ class BottomNav extends GetView<PageControllerView> {
                       margin: const EdgeInsets.all(5),
                       padding: const EdgeInsets.all(5),
                       decoration: BoxDecoration(
-                        color: Colors.grey.withOpacity(0.2),
+                        //color: Colors.grey.withOpacity(0.2),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: const Icon(
@@ -75,7 +75,7 @@ class BottomNav extends GetView<PageControllerView> {
                       margin: const EdgeInsets.all(5),
                       padding: const EdgeInsets.all(5),
                       decoration: BoxDecoration(
-                        color: Colors.grey.withOpacity(0.2),
+                        // color: Colors.grey.withOpacity(0.2),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: const Icon(
@@ -90,7 +90,7 @@ class BottomNav extends GetView<PageControllerView> {
                       margin: const EdgeInsets.all(5),
                       padding: const EdgeInsets.all(5),
                       decoration: BoxDecoration(
-                        color: Colors.grey.withOpacity(0.2),
+                        // color: Colors.grey.withOpacity(0.2),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: const Icon(

@@ -42,6 +42,8 @@ class _AuthEndPoints {
   final String registerEmail = 'auth/register';
   final String loginEmail = 'auth/login';
   final String categorie = 'service_api';
+  final String fetchUser = 'user';
+  final String logout = 'logout';
 }
 
 class _CategoryEndPoints {

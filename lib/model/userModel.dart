@@ -19,7 +19,7 @@ class UserModel {
       required this.referralCode,
       required this.emailVerifiedAt,
       required this.profilePhotoPath,
-      required this.isOnline,
+      //  required this.isOnline,
       required this.lastActivity});
 
   // Méthode pour créer une instance de UserModel à partir des données JSON
@@ -30,7 +30,7 @@ class UserModel {
       email: json['email'].toString(),
       phone: json['phone'].toString(),
       slug: json['slug'].toString(),
-      isOnline: json['is_online'],
+      //isOnline: json['is_online'],
       referralCode: json['referral_code'].toString(),
       emailVerifiedAt: json['email_verified_at'].toString(),
       profilePhotoPath: json['profile_photo_path'].toString(),

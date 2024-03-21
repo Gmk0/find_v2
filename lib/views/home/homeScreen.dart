@@ -2,6 +2,8 @@ import 'package:find_v2/components/bottomNav.dart';
 import 'package:find_v2/controller/PageControllerView.dart';
 import 'package:find_v2/views/ChatUser/ChatPage.dart';
 import 'package:find_v2/views/home/HomePage.dart';
+import 'package:find_v2/views/home/searchPageAll.dart';
+import 'package:find_v2/views/profile/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -33,9 +35,9 @@ class _HomeScreenState extends State<HomeScreen> {
             const HomePage(),
             ChatPage(),
             //MessageUser(),
-            //SearchPageAll(),
+            SearchPageAll(),
             //OrderUser(),
-            //  ProfileUser(),
+            ProfileUser(),
           ],
         ),
       ),

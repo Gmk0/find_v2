@@ -1,7 +1,9 @@
 import 'package:find_v2/components/backgroundConstainer.dart';
+import 'package:find_v2/components/bottomNav.dart';
 import 'package:find_v2/components/customAppBar.dart';
 import 'package:find_v2/components/header.dart';
 import 'package:find_v2/components/search.dart';
+import 'package:find_v2/views/home/homeSection.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -11,6 +13,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(),
+      bottomSheet: BottomNav(),
       body: BackgroundConstainer(
         child: SafeArea(
           child: SingleChildScrollView(
@@ -20,7 +23,7 @@ class HomePage extends StatelessWidget {
                 const Column(
                   children: [
                     Header(),
-                    //HomeSection(),
+                    HomeSection(),
                   ],
                 )
               ],

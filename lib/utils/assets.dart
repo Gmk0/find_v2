@@ -1,6 +1,8 @@
 const String appLogo = 'assets/images/find_02.png';
 const String logoFull = 'assets/images/ff3.png';
 const String appFeatureImage = 'assets/icon/feature_store.jpg';
+String linkImage =
+    "https://cdn.pixabay.com/photo/2017/12/10/17/40/prague-3010407_960_720.jpg";
 const String userPhoto = 'https://randomuser.me/api/portraits/men/5.jpg';
 const String fishtail =
     'https://firebasestorage.googleapis.com/v0/b/dl-flutter-ui-challenges.appspot.com/o/travel%2Ffishtail.jpg?alt=media';

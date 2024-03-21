@@ -25,12 +25,15 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           initialRoute: '/',
           initialBinding: AllIntialBinding(),
+          darkTheme: ThemeData(
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.grey.shade900),
+            useMaterial3: true,
+          ),
           theme: ThemeData(
             colorScheme: ColorScheme.fromSeed(seedColor: skinFill),
             useMaterial3: true,
           ),
           getPages: AppRoute.routes,
-          //home: const GetStarted(),
         );
       },
     );

@@ -1,3 +1,4 @@
+import 'package:find_v2/views/home/widgets/HomeSearch.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,7 +13,7 @@ class Search extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: () {
-              //Get.to(const SearchPage());
+              Get.to(() => HomeSearch(), transition: Transition.fadeIn);
             },
             child: Container(
               decoration: BoxDecoration(

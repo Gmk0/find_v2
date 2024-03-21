@@ -1,3 +1,4 @@
+import 'package:chat_bubbles/chat_bubbles.dart';
 import 'package:find_v2/controller/authController.dart';
 import 'package:find_v2/controller/chatController.dart';
 import 'package:find_v2/model/conversationModel.dart';
@@ -120,6 +121,10 @@ class _BodyChatState extends State<BodyChat> {
     }
   }
 
+  String datev(DateTime date) {
+    return date.toString();
+  }
+
   bool isSameDay(DateTime date1, DateTime date2) {
     return date1.year == date2.year &&
         date1.month == date2.month &&
@@ -230,27 +235,14 @@ class _BodyChatState extends State<BodyChat> {
 
                   // Liste des widgets pour les messages de cette date
                   List<Widget> messageWidgets = messagesForDate.map((message) {
-                    return Align(
-                      alignment:
-                          (message.receiverId == widget.conversation.user_id
-                              ? Alignment.topLeft
-                              : Alignment.topRight),
-                      child: Container(
-                        margin:
-                            EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-                        padding: EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color:
-                              (message.receiverId == widget.conversation.user_id
-                                  ? Colors.grey.shade200
-                                  : Colors.blue[200]),
-                        ),
-                        child: Text(
-                          message.body ?? '',
-                          style: const TextStyle(fontSize: 15),
-                        ),
-                      ),
+                    return BubbleSpecialThree(
+                      text: message.body ?? '',
+                      color: message.senderId == widget.conversation.user_id
+                          ? Color(0xFF1B97F3)
+                          : Color.fromARGB(255, 94, 94, 97),
+                      tail: true,
+                      isSender: message.senderId == widget.conversation.user_id,
+                      textStyle: TextStyle(color: Colors.white, fontSize: 16),
                     );
                   }).toList();
 
@@ -273,6 +265,7 @@ class _BodyChatState extends State<BodyChat> {
             ),
           ),
           Container(
+            margin: EdgeInsets.only(top: 10),
             padding: EdgeInsets.only(left: 10, bottom: 10, top: 10),
             height: 60,
             width: double.infinity,

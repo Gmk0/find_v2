@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:find_v2/binding/allntialBinding.dart';
+import 'package:find_v2/controller/UserController.dart';
 import 'package:find_v2/model/userModel.dart';
 import 'package:find_v2/utils/apiEndPoints.dart';
 import 'package:find_v2/views/home/homeScreen.dart';
@@ -17,6 +19,7 @@ class AuthController extends GetxController {
   TextEditingController telephone = TextEditingController();
   TextEditingController parainage = TextEditingController();
   TextEditingController terms = TextEditingController();
+  final UserController userController = Get.put(UserController());
 
   var user = UserModel(
     id: '',
@@ -28,7 +31,7 @@ class AuthController extends GetxController {
     emailVerifiedAt: '',
     profilePhotoPath: '',
     lastActivity: '',
-    isOnline: true,
+    //isOnline: true,
   ).obs;
 
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
@@ -52,8 +55,10 @@ class AuthController extends GetxController {
         final SharedPreferences prefs = await _prefs;
         await prefs.setString('token', token);
         await prefs.setBool('isLogin', true);
+
         await fillUserModel(userData);
 
+        await loadEssential();
         emailController.clear();
         passwordController.clear();
         Get.off(const HomeScreen(), transition: Transition.fadeIn);
@@ -67,6 +72,9 @@ class AuthController extends GetxController {
       }
     } catch (e) {
       print(e.toString());
+      Get.snackbar('Erreur', e.toString(),
+          snackPosition: SnackPosition.TOP,
+          duration: const Duration(seconds: 6));
     }
   }
 
@@ -97,6 +105,7 @@ class AuthController extends GetxController {
         emailController.clear();
         passwordController.clear();
         await fillUserModel(userData);
+        await userController.fetchUser();
 
         Get.off(const HomeScreen(), transition: Transition.fadeIn);
       } else if (response.statusCode == 422) {
@@ -139,5 +148,10 @@ class AuthController extends GetxController {
     user.value = UserModel.fromJson(userData);
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('userData', jsonEncode(userData));
+  }
+
+  Future<void> loadEssential() async {
+    AllIntialBinding().dependencies();
+    await userController.fetchUser();
   }
 }

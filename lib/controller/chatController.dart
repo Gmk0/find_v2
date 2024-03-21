@@ -3,16 +3,23 @@ import 'package:find_v2/model/categoryMode.dart';
 import 'package:find_v2/model/conversationModel.dart';
 import 'package:find_v2/model/messageModel.dart';
 import 'package:find_v2/utils/apiEndPoints.dart';
+//import 'package:find_v2/utils/laravelEcho.text';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ChatController extends GetxController {
   var conversations = <ConversationModel>[].obs;
+  //late LaravelEcho laravelEcho;
+  late String currentUserReceiver; // Le récepteur actuel de l'utilisateur
+  late String auth_token; // Token d'authentification Laravel Ech
 
   @override
   void onInit() {
     fetchConversation();
+    //auth_token = getAuthToken() as String;
+    //LaravelEcho.init(token: auth_token);
     super.onInit();
   }
 
@@ -26,13 +33,14 @@ class ChatController extends GetxController {
       if (response.statusCode == 200) {
         final responseData =
             jsonDecode(response.body)['conversations_user'] as List<dynamic>;
-        print(responseData);
+
         conversations.value = responseData
             .map((data) => ConversationModel.fromJson(data))
             .toList();
 
         conversations
             .sort((a, b) => b.last_time_message.compareTo(a.last_time_message));
+        // print(conversations.value);
       } else {
         print('Erreur lors de la récupération des données');
       }
@@ -107,5 +115,10 @@ class ChatController extends GetxController {
       // Ajouter la nouvelle conversation à la liste si elle n'existe pas déjà
       conversations.add(updatedConversation);
     }
+  }
+
+  Future<String> getAuthToken() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString('token') ?? '';
   }
 }

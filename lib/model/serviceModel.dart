@@ -8,7 +8,7 @@ class ServiceModel {
   // late String image;
   //late List<String> files;
   late String tag;
-  late String description;
+  late String? description;
   late String basicSupport;
   late String basicRevision;
   late String basicDeliveryTime;
@@ -24,11 +24,11 @@ class ServiceModel {
   late String format;
   late bool needService;
   late String deliveryTimeUnit;
-  late String subCategory;
+  late List<String>? subCategory;
   late String videoUrl;
   late int like;
   late bool isPublish;
-  late int categoryId;
+  late String categoryId;
   late String isGift;
   late String likeUser;
   late String orderCount;
@@ -39,89 +39,99 @@ class ServiceModel {
   //late CategoryModel category;
   late String urlDefault;
 
-  ServiceModel(
-    this.id,
-    this.title,
-    this.slug,
-    this.userSlug,
-    this.basicPrice,
-    this.serviceNumero,
-    // //this.image,
+  ServiceModel({
+    required this.id,
+    required this.title,
+    required this.slug,
+    required this.userSlug,
+    required this.basicPrice,
+    required this.serviceNumero,
+    required this.categoryId,
+    this.description,
+    this.subCategory,
+  }
 
-    //this.files,
-    //this.tag,
-    //this.description,
-    //this.basicSupport,
-    //this.basicRevision,
-    //this.basicDeliveryTime,
-    //this.premiumPrice,
-    //this.premiumSupport,
-    //this.premiumRevision,
-    //this.premiumDeliveryTime,
-    //this.extraPrice,
-    //this.extraSupport,
-    //this.extraRevision,
-    //this.extraDeliveryTime,
-    //this.example,
-    //this.format,
-    //this.needService,
-    //this.deliveryTimeUnit,
-    //this.subCategory,
-    //this.videoUrl,
-    //this.like,
-    //this.isPublish,
-    //this.categoryId,
-    //this.isGift,
-    //this.likeUser,
-    //this.orderCount,
-    //this.average,
-    //this.commandeEncours,
-    // //this.freelance,
-    //this.user,
-    //this.category,
-    //this.urlDefault,
-  );
+      // //this.image,
+
+      //this.files,
+      //this.tag,
+      //this.description,
+      //this.basicSupport,
+      //this.basicRevision,
+      //this.basicDeliveryTime,
+      //this.premiumPrice,
+      //this.premiumSupport,
+      //this.premiumRevision,
+      //this.premiumDeliveryTime,
+      //this.extraPrice,
+      //this.extraSupport,
+      //this.extraRevision,
+      //this.extraDeliveryTime,
+      //this.example,
+      //this.format,
+      //this.needService,
+      //this.deliveryTimeUnit,
+      //this.subCategory,
+      //this.videoUrl,
+      //this.like,
+      //this.isPublish,
+      //this.categoryId,
+      //this.isGift,
+      //this.likeUser,
+      //this.orderCount,
+      //this.average,
+      //this.commandeEncours,
+      // //this.freelance,
+      //this.user,
+      //this.category,
+      //this.urlDefault,
+      );
 
   factory ServiceModel.fromJson(Map<String, dynamic> json) {
-    return ServiceModel(json['id'], json['title'], json['slug'],
-        json['userSlug'], json['basic_price'], json['service_numero']
-        ////json['image'],
-        //files: List<String>.fro//m(json['files'] ?? [])
-        //  json['tag'],
-        //  json['description'],
-        //  json['basic_support'],
-        //  json['basic_revision'],
-        //  json['basic_delivery_time'],
-        //  json['premium_price'],
-        //  json['premium_support'],
-        //  json['premium_revision'],
-        //  json['premium_delivery_time'],
-        //  json['extra_price'],
-        //  json['extra_support'],
-        //  json['extra_revision'],
-        //  json['extra_delivery_time'],
-        //  json['example'],
-        //  json['format'],
-        //  json['need_service'],
-        //  json['delivery_time_unit'],
-        //  json['sub_category'],
-        //  json['video_url'],
-        //  json['like'],
-        //  json['is_publish'],
-        //  json['category_id'],
-        //  json['is_gift'],
-        //  json['likeUser'],
-        //  json['orderCount'],
-        //  json['average'],
-        //  json['commandeEncours'],
-        ////json['freelance'] = FreelanceModel.fr//omJso//n(json['freelance']),
-        ////json['user'] = UserModel.fr//omJso//n(json['user']),
-        ////json['category'] = CategoryModel.fr//omJso//n(json['category']!),
-        //  json['url_default']
-        );
-  }
-}
+    return ServiceModel(
+      id: json['id'],
+      title: json['title'],
+      slug: json['slug'],
+      userSlug: json['userSlug'],
+      basicPrice: json['basic_price'],
+      serviceNumero: json['service_numero'],
+      categoryId: json['category_id'],
+      description: json['description'],
+      subCategory: List<String>.from(['sub_category']),
 
-class User {
-  // Propriétés de l'utilisateur
+      ////json['image'],
+      //files: List<String>.fro//m(json['files'] ?? [])
+      //  json['tag'],
+      //  json['description'],
+      //  json['basic_support'],
+      //  json['basic_revision'],
+      //  json['basic_delivery_time'],
+      //  json['premium_price'],
+      //  json['premium_support'],
+      //  json['premium_revision'],
+      //  json['premium_delivery_time'],
+      //  json['extra_price'],
+      //  json['extra_support'],
+      //  json['extra_revision'],
+      //  json['extra_delivery_time'],
+      //  json['example'],
+      //  json['format'],
+      //  json['need_service'],
+      //  json['delivery_time_unit'],
+      //  json['sub_category'],
+      //  json['video_url'],
+      //  json['like'],
+      //  json['is_publish'],
+      //  json['category_id'],
+      //  json['is_gift'],
+      //  json['likeUser'],
+      //  json['orderCount'],
+      //  json['average'],
+      //  json['commandeEncours'],
+      ////json['freelance'] = FreelanceModel.fr//omJso//n(json['freelance']),
+      ////json['user'] = UserModel.fr//omJso//n(json['user']),
+      ////json['category'] = CategoryModel.fr//omJso//n(json['category']!),
+      //  json['url_default']
+    );
+  }
 }
