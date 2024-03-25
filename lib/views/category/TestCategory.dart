@@ -304,13 +304,6 @@ class _TestCategoryState extends State<TestCategory>
                     ),
                     onTap: () {
                       FocusScope.of(context).requestFocus(FocusNode());
-                      Navigator.push<dynamic>(
-                        context,
-                        MaterialPageRoute<dynamic>(
-                            builder: (BuildContext context) =>
-                                const FiltersScreen(),
-                            fullscreenDialog: true),
-                      );
                     },
                     child: Padding(
                       padding: const EdgeInsets.only(left: 8),

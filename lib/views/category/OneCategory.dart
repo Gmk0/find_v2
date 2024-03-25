@@ -1,10 +1,7 @@
 import 'package:find_v2/components/bottomNav.dart';
-import 'package:find_v2/components/buildServiceCard.dart';
-import 'package:find_v2/components/netWorkImage.dart';
 import 'package:find_v2/controller/ServiceController.dart';
+import 'package:find_v2/controller/filtreController.dart';
 import 'package:find_v2/model/categoryMode.dart';
-import 'package:find_v2/model/serviceModel.dart';
-import 'package:find_v2/utils/assets.dart';
 import 'package:find_v2/utils/theme.dart';
 import 'package:find_v2/utils/theme2.dart';
 import 'package:find_v2/views/category/TestCategory.dart';
@@ -12,11 +9,9 @@ import 'package:find_v2/views/category/widgets/FilterScreen.dart';
 import 'package:find_v2/views/category/widgets/ServiceListeView.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-
-import 'widgets/_SliverAppBarDelegate.dart';
 
 class OneCategory extends StatefulWidget {
   const OneCategory({super.key, required this.category});
@@ -32,6 +27,8 @@ class _OneCategoryState extends State<OneCategory>
   final ScrollController _scrollController = ScrollController();
   late final AnimationController animationController;
   final ServiceController serviceController = Get.find();
+  final FilterController filterController = Get.find();
+
   var servicesOhter;
 
   @override
@@ -40,12 +37,14 @@ class _OneCategoryState extends State<OneCategory>
 
     animationController = AnimationController(
         duration: const Duration(milliseconds: 1000), vsync: this);
-    servicesOhter = serviceController.getServicesByCategory(widget.category);
+    //servicesOhter = serviceController.getServicesByCategory2(widget.category);
   }
 
   @override
   void dispose() {
     animationController.dispose();
+    filterController.resetFilters();
+
     super.dispose();
   }
 
@@ -87,7 +86,7 @@ class _OneCategoryState extends State<OneCategory>
                           pinned: true,
                           floating: true,
                           delegate: ContestTabHeader(
-                            getFilterBarUI(servicesOhter.length.toString()),
+                            getFilterBarUI(),
                           ),
                         ),
                       ];
@@ -97,10 +96,13 @@ class _OneCategoryState extends State<OneCategory>
                             FindTheme.buildLightTheme().colorScheme.background,
                         child: Obx(() {
                           final services = serviceController
-                              .getServicesByCategory(widget.category);
+                              .getServicesByCategory2(widget.category);
 
                           if (services.isEmpty) {
-                            return Container();
+                            return Container(
+                                child: Center(
+                              child: Text("Aucun service disponible"),
+                            ));
                           } else {
                             return ListView.builder(
                               itemCount: services.length,
@@ -226,7 +228,7 @@ class _OneCategoryState extends State<OneCategory>
                   padding: const EdgeInsets.only(
                       left: 16, right: 16, top: 4, bottom: 4),
                   child: TextField(
-                    onChanged: (String txt) {},
+                    controller: filterController.searchFiltre,
                     style: const TextStyle(
                       fontSize: 18,
                     ),
@@ -278,98 +280,102 @@ class _OneCategoryState extends State<OneCategory>
     );
   }
 
-  Widget getFilterBarUI(String count) {
-    return Stack(
-      children: <Widget>[
-        Positioned(
-          top: 0,
-          left: 0,
-          right: 0,
-          child: Container(
-            height: 24,
-            decoration: BoxDecoration(
-              color: FindTheme.buildLightTheme().colorScheme.background,
-              boxShadow: <BoxShadow>[
-                BoxShadow(
-                    color: Colors.grey.withOpacity(0.2),
-                    offset: const Offset(0, -2),
-                    blurRadius: 8.0),
-              ],
+  Widget getFilterBarUI() {
+    return Obx(() {
+      final services =
+          serviceController.getServicesByCategory2(widget.category);
+      return Stack(
+        children: <Widget>[
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            child: Container(
+              height: 24,
+              decoration: BoxDecoration(
+                color: FindTheme.buildLightTheme().colorScheme.background,
+                boxShadow: <BoxShadow>[
+                  BoxShadow(
+                      color: Colors.grey.withOpacity(0.2),
+                      offset: const Offset(0, -2),
+                      blurRadius: 8.0),
+                ],
+              ),
             ),
           ),
-        ),
-        Container(
-          color: FindTheme.buildLightTheme().colorScheme.background,
-          child: Padding(
-            padding:
-                const EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 4),
-            child: Row(
-              children: <Widget>[
-                Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Text(
-                      '${count} services',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 16,
-                      ),
-                    ),
-                  ),
-                ),
-                Material(
-                  color: Colors.transparent,
-                  child: InkWell(
-                    focusColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                    splashColor: Colors.grey.withOpacity(0.2),
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(4.0),
-                    ),
-                    onTap: () {
-                      FocusScope.of(context).requestFocus(FocusNode());
-                      Navigator.push<dynamic>(
-                        context,
-                        MaterialPageRoute<dynamic>(
-                            builder: (BuildContext context) =>
-                                const FiltersScreen(),
-                            fullscreenDialog: true),
-                      );
-                    },
+          Container(
+            color: FindTheme.buildLightTheme().colorScheme.background,
+            child: Padding(
+              padding:
+                  const EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 4),
+              child: Row(
+                children: <Widget>[
+                  Expanded(
                     child: Padding(
-                      padding: const EdgeInsets.only(left: 8),
-                      child: Row(
-                        children: <Widget>[
-                          const Text(
-                            'Filter',
-                            style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 16,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Icon(Icons.sort, color: skinFill),
-                          ),
-                        ],
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        '${services.length} services',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 16,
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                  Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      focusColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      splashColor: Colors.grey.withOpacity(0.2),
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(4.0),
+                      ),
+                      onTap: () {
+                        FocusScope.of(context).requestFocus(FocusNode());
+                        Navigator.push<dynamic>(
+                          context,
+                          MaterialPageRoute<dynamic>(
+                              builder: (BuildContext context) =>
+                                  FilterScreen(categoryModel: widget.category),
+                              fullscreenDialog: true),
+                        );
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 8),
+                        child: Row(
+                          children: <Widget>[
+                            const Text(
+                              'Filter',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 16,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Icon(Icons.sort, color: skinFill),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
-        const Positioned(
-          top: 0,
-          left: 0,
-          right: 0,
-          child: Divider(
-            height: 1,
-          ),
-        )
-      ],
-    );
+          const Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            child: Divider(
+              height: 1,
+            ),
+          )
+        ],
+      );
+    });
   }
 }

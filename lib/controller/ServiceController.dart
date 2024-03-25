@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:find_v2/controller/filtreController.dart';
 import 'package:find_v2/model/categoryMode.dart';
 import 'package:find_v2/model/freelanceModel.dart';
 import 'package:find_v2/model/serviceModel.dart';
@@ -11,6 +12,8 @@ class ServiceController extends GetxController {
   var serviceAll = <ServiceModel>[].obs;
   var servicePopular = <ServiceModel>[].obs;
   var freelancesAll = <FreelanceModel>[].obs;
+
+  final FilterController filterController = Get.find();
 
   @override
   void onInit() {
@@ -82,5 +85,40 @@ class ServiceController extends GetxController {
         .toList();
     print(serviceAll);
     return serviceAll;
+  }
+
+  List<ServiceModel> getServicesByCategory2(CategoryModel category) {
+    // Filtrer les services en fonction de l'ID de la catégorie et des filtres sélectionnés
+    return serviceAll.where((service) {
+      // Filtrer par ID de catégorie
+      if (service.categoryId != category.id) return false;
+
+      // Filtrer par niveau de freelance
+      if (filterController.levelFilter.value.isNotEmpty &&
+          !filterController.levelFilter.value
+              .contains(service.freelance.level.toString())) {
+        return false;
+      }
+
+      // Filtrer par service populaire
+      if (filterController.isPopularFilter.value.isNotEmpty &&
+          service.premiumPrice !=
+              (filterController.isPopularFilter.value == 'Yes')) {
+        return false;
+      }
+
+      if (filterController.priceFilter.value.start >= 0 &&
+          filterController.priceFilter.value.end != 0 &&
+          (double.parse(service.basicPrice) <
+                  filterController.priceFilter.value.start ||
+              double.parse(service.basicPrice) >
+                  filterController.priceFilter.value.end)) {
+        return false;
+      }
+
+      // Ajoutez d'autres filtres ici si nécessaire
+
+      return true; // Conserver ce service car il répond à tous les critères
+    }).toList();
   }
 }

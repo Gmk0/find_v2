@@ -96,9 +96,18 @@ class ServiceListView extends StatelessWidget {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    const ReusableText(
-                                      text: "4",
-                                      style: TextStyle(fontSize: 16),
+                                    const Row(
+                                      children: [
+                                        Icon(
+                                          Icons.star,
+                                          color: Colors.yellow,
+                                          size: 16.0,
+                                        ),
+                                        ReusableText(
+                                          text: "(4)",
+                                          style: TextStyle(fontSize: 16),
+                                        ),
+                                      ],
                                     ),
                                     IconButton(
                                       onPressed: () {},

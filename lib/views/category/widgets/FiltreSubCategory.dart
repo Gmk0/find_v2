@@ -1,4 +1,3 @@
-import 'package:find_v2/components/reusableText.dart';
 import 'package:find_v2/controller/filtreController.dart';
 import 'package:find_v2/model/categoryMode.dart';
 import 'package:find_v2/tools/classFiltre.dart';
@@ -7,21 +6,18 @@ import 'package:find_v2/utils/theme2.dart';
 import 'package:find_v2/views/category/widgets/rangeSliderView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 
-class FilterScreen extends StatefulWidget {
-  const FilterScreen({super.key, required this.categoryModel});
-
-  final CategoryModel categoryModel;
+class FiltreSubCategory extends StatefulWidget {
+  const FiltreSubCategory({super.key, required this.categoryModel});
+  final SubCategoryModel categoryModel;
   @override
-  State<FilterScreen> createState() => _FilterScreenState();
+  @override
+  State<FiltreSubCategory> createState() => _FiltreSubCategoryState();
 }
 
-class _FilterScreenState extends State<FilterScreen> {
+class _FiltreSubCategoryState extends State<FiltreSubCategory> {
   final FilterController filterController = Get.find();
 
   List<String> getSelectedFilters() {
@@ -60,8 +56,6 @@ class _FilterScreenState extends State<FilterScreen> {
                   const Divider(
                     height: 1,
                   ),
-
-                  getSubcategory(),
 
                   const Divider(
                     height: 1,
@@ -244,49 +238,6 @@ class _FilterScreenState extends State<FilterScreen> {
           padding: const EdgeInsets.only(right: 16, left: 16),
           child: Column(
             children: getPList(),
-          ),
-        ),
-        const SizedBox(
-          height: 8,
-        )
-      ],
-    );
-  }
-
-  Widget getSubcategory() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Padding(
-          padding:
-              const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 8),
-          child: Text(
-            'Sous categorie',
-            textAlign: TextAlign.left,
-            style: TextStyle(
-                color: Colors.grey,
-                fontSize: MediaQuery.of(context).size.width > 360 ? 18 : 16,
-                fontWeight: FontWeight.normal),
-          ),
-        ),
-        Padding(
-          padding:
-              const EdgeInsets.only(right: 16, left: 16, top: 10, bottom: 10),
-          child: MultiSelectDialogField(
-            title: Text("Sous categories"),
-            buttonText: Text("Sous categories"),
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey),
-              borderRadius: BorderRadius.circular(8.0),
-            ),
-            items: widget.categoryModel.subcategories!
-                .map((e) => MultiSelectItem(e, e.name))
-                .toList(),
-            listType: MultiSelectListType.CHIP,
-            onConfirm: (values) {
-              //filterController.getSubCategory(values);
-            },
           ),
         ),
         const SizedBox(

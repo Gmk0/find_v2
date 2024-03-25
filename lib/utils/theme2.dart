@@ -23,8 +23,9 @@ class FindTheme {
   static ThemeData buildLightTheme() {
     const Color primaryColor = Color(0xFF54D3C2);
     const Color secondaryColor = Color(0xFF54D3C2);
+    Color findSkinFill = Color.fromRGBO(244, 117, 33, 1);
     final ColorScheme colorScheme = const ColorScheme.light().copyWith(
-      primary: primaryColor,
+      primary: findSkinFill,
       secondary: secondaryColor,
     );
     final ThemeData base = ThemeData.light();

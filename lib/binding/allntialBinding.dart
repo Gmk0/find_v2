@@ -3,6 +3,7 @@ import 'package:find_v2/controller/ServiceController.dart';
 import 'package:find_v2/controller/UserController.dart';
 import 'package:find_v2/controller/categoryController.dart';
 import 'package:find_v2/controller/chatController.dart';
+import 'package:find_v2/controller/filtreController.dart';
 import 'package:get/get.dart';
 
 class AllIntialBinding implements Bindings {
@@ -14,6 +15,7 @@ class AllIntialBinding implements Bindings {
     Get.put<ChatController>(ChatController());
     //Get.lazyPut<ChatController>(() => ChatController());
     Get.lazyPut<UserController>(() => UserController());
+    Get.put<FilterController>(FilterController());
   }
 
   // Méthode pour charger les dépendances

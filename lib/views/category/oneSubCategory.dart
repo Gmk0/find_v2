@@ -1,4 +1,5 @@
 import 'package:find_v2/model/categoryMode.dart';
+import 'package:find_v2/views/category/widgets/FiltreSubCategory.dart';
 import 'package:flutter/material.dart';
 import 'package:find_v2/components/bottomNav.dart';
 
@@ -330,7 +331,8 @@ class _OneSubCategoryState extends State<OneSubCategory>
                         context,
                         MaterialPageRoute<dynamic>(
                             builder: (BuildContext context) =>
-                                const FiltersScreen(),
+                                FiltreSubCategory(
+                                    categoryModel: widget.subcategory!),
                             fullscreenDialog: true),
                       );
                     },

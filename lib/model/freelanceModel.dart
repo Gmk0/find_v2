@@ -7,23 +7,28 @@ class FreelanceModel {
   late String nomComplet;
   late String identifiant;
   late String description;
-
   late int level;
   late UserModel user;
 
-  FreelanceModel(this.id, this.nom, this.prenom, this.nomComplet,
-      this.identifiant, this.description, this.level,
-      {required this.user});
+  FreelanceModel(
+      {required this.id,
+      required this.nom,
+      required this.prenom,
+      required this.nomComplet,
+      required this.identifiant,
+      required this.description,
+      required this.level,
+      required this.user});
 
   factory FreelanceModel.fromJson(Map<String, dynamic> json) {
     return FreelanceModel(
-        json['id'],
-        json['nom'],
-        json['prenom'],
-        json['nomComplet'],
-        json['identifiant'],
-        json['description'],
-        json['level'],
+        id: json['id'],
+        nom: json['nom'],
+        prenom: json['prenom'],
+        nomComplet: json['nomComplet'],
+        identifiant: json['identifiant'],
+        description: json['description'],
+        level: json['level'],
         user: UserModel.fromJson(json['user']));
   }
 }

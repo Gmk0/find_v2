@@ -1,3 +1,5 @@
+import 'package:find_v2/model/freelanceModel.dart';
+
 class ServiceModel {
   late String id;
   late String title;
@@ -34,22 +36,22 @@ class ServiceModel {
   late String orderCount;
   late String average;
   late String commandeEncours;
-  //late FreelanceModel freelance;
+  late FreelanceModel freelance;
   //late UserModel user;
   //late CategoryModel category;
   late String urlDefault;
 
-  ServiceModel({
-    required this.id,
-    required this.title,
-    required this.slug,
-    required this.userSlug,
-    required this.basicPrice,
-    required this.serviceNumero,
-    required this.categoryId,
-    this.description,
-    this.subCategory,
-  }
+  ServiceModel(
+      {required this.id,
+      required this.title,
+      required this.slug,
+      required this.userSlug,
+      required this.basicPrice,
+      required this.serviceNumero,
+      required this.categoryId,
+      this.description,
+      this.subCategory,
+      required this.freelance}
 
       // //this.image,
 
@@ -89,49 +91,50 @@ class ServiceModel {
 
   factory ServiceModel.fromJson(Map<String, dynamic> json) {
     return ServiceModel(
-      id: json['id'],
-      title: json['title'],
-      slug: json['slug'],
-      userSlug: json['userSlug'],
-      basicPrice: json['basic_price'],
-      serviceNumero: json['service_numero'],
-      categoryId: json['category_id'],
-      description: json['description'],
-      subCategory: List<String>.from(['sub_category']),
+        id: json['id'],
+        title: json['title'],
+        slug: json['slug'],
+        userSlug: json['userSlug'],
+        basicPrice: json['basic_price'],
+        serviceNumero: json['service_numero'],
+        categoryId: json['category_id'],
+        description: json['description'],
+        subCategory: List<String>.from(['sub_category']),
+        freelance: FreelanceModel.fromJson(json['freelance'])
 
-      ////json['image'],
-      //files: List<String>.fro//m(json['files'] ?? [])
-      //  json['tag'],
-      //  json['description'],
-      //  json['basic_support'],
-      //  json['basic_revision'],
-      //  json['basic_delivery_time'],
-      //  json['premium_price'],
-      //  json['premium_support'],
-      //  json['premium_revision'],
-      //  json['premium_delivery_time'],
-      //  json['extra_price'],
-      //  json['extra_support'],
-      //  json['extra_revision'],
-      //  json['extra_delivery_time'],
-      //  json['example'],
-      //  json['format'],
-      //  json['need_service'],
-      //  json['delivery_time_unit'],
-      //  json['sub_category'],
-      //  json['video_url'],
-      //  json['like'],
-      //  json['is_publish'],
-      //  json['category_id'],
-      //  json['is_gift'],
-      //  json['likeUser'],
-      //  json['orderCount'],
-      //  json['average'],
-      //  json['commandeEncours'],
-      ////json['freelance'] = FreelanceModel.fr//omJso//n(json['freelance']),
-      ////json['user'] = UserModel.fr//omJso//n(json['user']),
-      ////json['category'] = CategoryModel.fr//omJso//n(json['category']!),
-      //  json['url_default']
-    );
+        ////json['image'],
+        //files: List<String>.fro//m(json['files'] ?? [])
+        //  json['tag'],
+        //  json['description'],
+        //  json['basic_support'],
+        //  json['basic_revision'],
+        //  json['basic_delivery_time'],
+        //  json['premium_price'],
+        //  json['premium_support'],
+        //  json['premium_revision'],
+        //  json['premium_delivery_time'],
+        //  json['extra_price'],
+        //  json['extra_support'],
+        //  json['extra_revision'],
+        //  json['extra_delivery_time'],
+        //  json['example'],
+        //  json['format'],
+        //  json['need_service'],
+        //  json['delivery_time_unit'],
+        //  json['sub_category'],
+        //  json['video_url'],
+        //  json['like'],
+        //  json['is_publish'],
+        //  json['category_id'],
+        //  json['is_gift'],
+        //  json['likeUser'],
+        //  json['orderCount'],
+        //  json['average'],
+        //  json['commandeEncours'],
+        ////json['freelance'] = FreelanceModel.fr//omJso//n(json['freelance']),
+        ////json['user'] = UserModel.fr//omJso//n(json['user']),
+        ////json['category'] = CategoryModel.fr//omJso//n(json['category']!),
+        //  json['url_default']
+        );
   }
 }
