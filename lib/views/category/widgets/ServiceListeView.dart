@@ -4,6 +4,8 @@ import 'package:find_v2/utils/assets.dart';
 import 'package:find_v2/utils/theme.dart';
 import 'package:find_v2/utils/theme2.dart';
 import 'package:find_v2/views/service/OneService.dart';
+import 'package:find_v2/views/service/OneService2.dart';
+import 'package:find_v2/views/service/OneServiceView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -38,10 +40,8 @@ class ServiceListView extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(left: 12, right: 12, top: 8),
               child: GestureDetector(
-                onTap: () => {
-                  Get.to(OneService(service: service),
-                      transition: Transition.fadeIn)
-                },
+                onTap: () =>
+                    {Get.to(oneServiceView(), transition: Transition.fadeIn)},
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: const BorderRadius.all(Radius.circular(16.0)),

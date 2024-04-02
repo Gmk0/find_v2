@@ -2,6 +2,7 @@ import 'package:find_v2/components/FreelanceCard.dart';
 import 'package:find_v2/components/appStyle.dart';
 import 'package:find_v2/components/reusableText.dart';
 import 'package:find_v2/controller/ServiceController.dart';
+import 'package:find_v2/views/freelance/allFreelance.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -36,6 +37,7 @@ class FreelancePopular extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
+                      Get.to(() => AllFreelance());
                       // Action à effectuer lorsque "View All" est cliqué
                     },
                     child: ReusableText(

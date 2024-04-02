@@ -1,6 +1,7 @@
 import 'package:find_v2/views/ChatUser/ChatPage.dart';
 import 'package:find_v2/views/home/HomePage.dart';
 import 'package:find_v2/views/home/searchPageAll.dart';
+import 'package:find_v2/views/home/widgets/HomeSearch.dart';
 import 'package:find_v2/views/profile/profile.dart';
 import 'package:get/get.dart';
 
@@ -21,7 +22,7 @@ class PageControllerView extends GetxController {
         Get.to(() => ChatPage(), transition: Transition.fadeIn);
         break;
       case 2:
-        Get.to(SearchPageAll(), transition: Transition.fade);
+        Get.to(() => HomeSearch(), transition: Transition.fadeIn);
         break;
       case 3:
         Get.to(SearchPageAll(), transition: Transition.fade);

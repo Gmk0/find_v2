@@ -1,6 +1,7 @@
 import 'package:find_v2/binding/allntialBinding.dart';
 import 'package:find_v2/route/appRoute.dart';
 import 'package:find_v2/utils/theme.dart';
+import 'package:find_v2/utils/theme2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -22,17 +23,12 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return GetMaterialApp(
           title: 'FIND',
+          theme: FindTheme.lightTheme,
+          darkTheme: FindTheme.darkTheme,
+          themeMode: ThemeMode.dark,
           debugShowCheckedModeBanner: false,
           initialRoute: '/',
           initialBinding: AllIntialBinding(),
-          darkTheme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.grey.shade900),
-            useMaterial3: true,
-          ),
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: skinFill),
-            useMaterial3: true,
-          ),
           getPages: AppRoute.routes,
         );
       },
