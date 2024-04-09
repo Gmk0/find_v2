@@ -50,8 +50,14 @@ class _OneCategoryState extends State<OneCategory>
 
   @override
   Widget build(BuildContext context) {
+    final Brightness brightness = Theme.of(context).brightness;
+    final Color backgroundColor =
+        brightness == Brightness.dark ? Colors.grey[900]! : Colors.white;
+    final Color backgroundColorSub =
+        brightness == Brightness.dark ? Colors.black : Colors.white;
+
     return Scaffold(
-      backgroundColor: Colors.white,
+      // backgroundColor: Colors.white,
       body: Stack(
         children: [
           InkWell(
@@ -76,7 +82,7 @@ class _OneCategoryState extends State<OneCategory>
                               (BuildContext context, int index) {
                             return Column(
                               children: <Widget>[
-                                getSearchBarUI(),
+                                getSearchBarUI(backgroundColor),
                                 // getTimeDateUI(),
                               ],
                             );
@@ -86,46 +92,45 @@ class _OneCategoryState extends State<OneCategory>
                           pinned: true,
                           floating: true,
                           delegate: ContestTabHeader(
-                            getFilterBarUI(),
+                            getFilterBarUI(backgroundColor),
                           ),
                         ),
                       ];
                     },
                     body: Container(
-                        color:
-                            FindTheme.buildLightTheme().colorScheme.background,
+                        //color:FindTheme.buildLightTheme().colorScheme.background,
                         child: Obx(() {
-                          final services = serviceController
-                              .getServicesByCategory2(widget.category);
+                      final services = serviceController
+                          .getServicesByCategory2(widget.category);
 
-                          if (services.isEmpty) {
-                            return Container(
-                                child: Center(
-                              child: Text("Aucun service disponible"),
-                            ));
-                          } else {
-                            return ListView.builder(
-                              itemCount: services.length,
-                              padding: const EdgeInsets.only(top: 8),
-                              itemBuilder: (BuildContext context, int index) {
-                                final int count = services.length;
-                                final Animation<double> animation =
-                                    Tween<double>(begin: 0.0, end: 1.0).animate(
-                                        CurvedAnimation(
-                                            parent: animationController,
-                                            curve: Interval(
-                                                (1 / count) * index, 1.0,
-                                                curve: Curves.fastOutSlowIn)));
-                                animationController.forward();
-                                return ServiceListView(
-                                    service: services[index],
-                                    animationController: animationController,
-                                    animation: animation,
-                                    callback: () {});
-                              },
-                            );
-                          }
-                        })),
+                      if (services.isEmpty) {
+                        return Container(
+                            child: Center(
+                          child: Text("Aucun service disponible"),
+                        ));
+                      } else {
+                        return ListView.builder(
+                          itemCount: services.length,
+                          padding: const EdgeInsets.only(top: 8),
+                          itemBuilder: (BuildContext context, int index) {
+                            final int count = services.length;
+                            final Animation<double> animation =
+                                Tween<double>(begin: 0.0, end: 1.0).animate(
+                                    CurvedAnimation(
+                                        parent: animationController,
+                                        curve: Interval(
+                                            (1 / count) * index, 1.0,
+                                            curve: Curves.fastOutSlowIn)));
+                            animationController.forward();
+                            return ServiceListView(
+                                service: services[index],
+                                animationController: animationController,
+                                animation: animation,
+                                callback: () {});
+                          },
+                        );
+                      }
+                    })),
                   ),
                 )
               ],
@@ -139,10 +144,10 @@ class _OneCategoryState extends State<OneCategory>
   Widget getAppBarUI() {
     return Container(
       decoration: BoxDecoration(
-        color: FindTheme.buildLightTheme().colorScheme.background,
+        // color: FindTheme.buildLightTheme().colorScheme.background,
         boxShadow: <BoxShadow>[
           BoxShadow(
-              color: Colors.grey.withOpacity(0.2),
+              //color: Colors.grey.withOpacity(0.2),
               offset: const Offset(0, 2),
               blurRadius: 8.0),
         ],
@@ -203,7 +208,7 @@ class _OneCategoryState extends State<OneCategory>
     );
   }
 
-  Widget getSearchBarUI() {
+  Widget getSearchBarUI(Color backgroundColor) {
     return Padding(
       padding: const EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 8),
       child: Row(
@@ -213,13 +218,13 @@ class _OneCategoryState extends State<OneCategory>
               padding: const EdgeInsets.only(right: 16, top: 8, bottom: 8),
               child: Container(
                 decoration: BoxDecoration(
-                  color: FindTheme.buildLightTheme().colorScheme.background,
+                  color: backgroundColor,
                   borderRadius: const BorderRadius.all(
                     Radius.circular(38.0),
                   ),
                   boxShadow: <BoxShadow>[
                     BoxShadow(
-                        color: Colors.grey.withOpacity(0.2),
+                        // color: Colors.grey.withOpacity(0.2),
                         offset: const Offset(0, 2),
                         blurRadius: 8.0),
                   ],
@@ -280,7 +285,7 @@ class _OneCategoryState extends State<OneCategory>
     );
   }
 
-  Widget getFilterBarUI() {
+  Widget getFilterBarUI(Color backgroundColor) {
     return Obx(() {
       final services =
           serviceController.getServicesByCategory2(widget.category);
@@ -293,10 +298,10 @@ class _OneCategoryState extends State<OneCategory>
             child: Container(
               height: 24,
               decoration: BoxDecoration(
-                color: FindTheme.buildLightTheme().colorScheme.background,
+                color: backgroundColor,
                 boxShadow: <BoxShadow>[
                   BoxShadow(
-                      color: Colors.grey.withOpacity(0.2),
+                      // color: Colors.grey.withOpacity(0.2),
                       offset: const Offset(0, -2),
                       blurRadius: 8.0),
                 ],
@@ -304,7 +309,7 @@ class _OneCategoryState extends State<OneCategory>
             ),
           ),
           Container(
-            color: FindTheme.buildLightTheme().colorScheme.background,
+            color: backgroundColor,
             child: Padding(
               padding:
                   const EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 4),
@@ -328,7 +333,7 @@ class _OneCategoryState extends State<OneCategory>
                       focusColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       hoverColor: Colors.transparent,
-                      splashColor: Colors.grey.withOpacity(0.2),
+                      //  splashColor: Colors.grey.withOpacity(0.2),
                       borderRadius: const BorderRadius.all(
                         Radius.circular(4.0),
                       ),

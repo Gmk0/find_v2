@@ -9,11 +9,14 @@ class BackgroundConstainer extends StatelessWidget {
   final Color? color;
   @override
   Widget build(BuildContext context) {
+    final Brightness brightness = Theme.of(context).brightness;
+    final Color backgroundColor =
+        brightness == Brightness.dark ? Colors.grey[900]! : Colors.white;
     return Container(
       width: width,
       height: heigth,
       decoration: BoxDecoration(
-          color: color ?? lightPrimary,
+          // color: backgroundColor,
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(30.r), topRight: Radius.circular(30.r))),
       child: child,

@@ -74,6 +74,13 @@ const List<String> images = [
   'https://firebasestorage.googleapis.com/v0/b/dl-flutter-ui-challenges.appspot.com/o/img%2F7.jpg?alt=media',
 ];
 
+const List<String> imagesSplash = [
+  'assets/images/img1.JPG',
+  'assets/images/img2.JPG',
+  'assets/images/img3.jpg',
+  'assets/images/background2.webp'
+];
+
 const List<String> backgroundImages = [
   'https://firebasestorage.googleapis.com/v0/b/dl-flutter-ui-challenges.appspot.com/o/img%2Fb1.jpg?alt=media',
   'https://firebasestorage.googleapis.com/v0/b/dl-flutter-ui-challenges.appspot.com/o/img%2Fb2.jpg?alt=media',

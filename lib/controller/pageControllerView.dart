@@ -1,3 +1,4 @@
+import 'package:find_v2/binding/allntialBinding.dart';
 import 'package:find_v2/views/ChatUser/ChatPage.dart';
 import 'package:find_v2/views/home/HomePage.dart';
 import 'package:find_v2/views/home/searchPageAll.dart';
@@ -28,9 +29,13 @@ class PageControllerView extends GetxController {
         Get.to(SearchPageAll(), transition: Transition.fade);
         break;
       case 4:
-        Get.to(ProfileUser(), transition: Transition.fade);
+        Get.offAll(Profile(), transition: Transition.fade);
         break;
       // Ajoutez d'autres cas pour d'autres pages si nécessaire
     }
+  }
+
+  Future<void> loadEssential() async {
+    AllIntialBinding().dependencies();
   }
 }

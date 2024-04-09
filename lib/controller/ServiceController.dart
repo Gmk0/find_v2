@@ -52,12 +52,11 @@ class ServiceController extends GetxController {
         final responseData =
             jsonDecode(response.body)['allfreelances'] as List<dynamic>;
 
-        print(responseData);
         freelancesAll.value =
             responseData.map((data) => FreelanceModel.fromJson(data)).toList();
       }
     } catch (e) {
-      Get.snackbar('Erreur', e.toString(),
+      Get.snackbar('Erreur Freelance', e.toString(),
           snackPosition: SnackPosition.TOP,
           duration: const Duration(seconds: 6));
       print(e.toString());

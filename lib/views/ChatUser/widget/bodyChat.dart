@@ -1,4 +1,5 @@
 import 'package:chat_bubbles/chat_bubbles.dart';
+import 'package:find_v2/controller/UserController.dart';
 import 'package:find_v2/controller/authController.dart';
 import 'package:find_v2/controller/chatController.dart';
 import 'package:find_v2/model/conversationModel.dart';
@@ -6,8 +7,11 @@ import 'package:find_v2/model/freelanceModel.dart';
 import 'package:find_v2/model/messageModel.dart';
 import 'package:find_v2/model/userModel.dart';
 import 'package:find_v2/utils/assets.dart';
+import 'package:find_v2/utils/theme.dart';
+import 'package:find_v2/utils/theme2.dart';
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
 
 class BodyChat extends StatefulWidget {
@@ -22,7 +26,7 @@ class BodyChat extends StatefulWidget {
 }
 
 class _BodyChatState extends State<BodyChat> {
-  var user = Get.put(AuthController()).user.value;
+  var user = Get.find<UserController>().userGet.value;
 
   late ChatController chatController;
   final TextEditingController _messageController = TextEditingController();
@@ -137,7 +141,7 @@ class _BodyChatState extends State<BodyChat> {
       appBar: AppBar(
         elevation: 0,
         automaticallyImplyLeading: false,
-        backgroundColor: Colors.white,
+        // backgroundColor: Colors.white,
         flexibleSpace: SafeArea(
           child: Container(
             padding: EdgeInsets.only(right: 16),
@@ -149,7 +153,7 @@ class _BodyChatState extends State<BodyChat> {
                   },
                   icon: Icon(
                     Icons.arrow_back,
-                    color: Colors.black,
+                    color: skinFill,
                   ),
                 ),
                 SizedBox(
@@ -185,7 +189,7 @@ class _BodyChatState extends State<BodyChat> {
                 ),
                 Icon(
                   Icons.settings,
-                  color: Colors.black54,
+                  color: skinFill,
                 ),
               ],
             ),
@@ -198,7 +202,7 @@ class _BodyChatState extends State<BodyChat> {
             child: Padding(
               padding: const EdgeInsets.only(top: 8.0),
               child: ListView.builder(
-                reverse: true,
+                reverse: false,
                 itemCount: groupMessagesByDate(widget.messages!).length,
                 itemBuilder: (context, index) {
                   DateTime date = groupMessagesByDate(widget.messages!)
@@ -219,7 +223,8 @@ class _BodyChatState extends State<BodyChat> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 10, vertical: 5),
                         decoration: BoxDecoration(
-                            color: Colors.grey.shade200,
+                            color:
+                                ThemeDarkBackground.getBackgroundColor(context),
                             borderRadius:
                                 BorderRadius.all(Radius.circular(15))),
                         child: Text(
@@ -235,14 +240,9 @@ class _BodyChatState extends State<BodyChat> {
 
                   // Liste des widgets pour les messages de cette date
                   List<Widget> messageWidgets = messagesForDate.map((message) {
-                    return BubbleSpecialThree(
-                      text: message.body ?? '',
-                      color: message.senderId == widget.conversation.user_id
-                          ? Color(0xFF1B97F3)
-                          : Color.fromARGB(255, 94, 94, 97),
-                      tail: true,
-                      isSender: message.senderId == widget.conversation.user_id,
-                      textStyle: TextStyle(color: Colors.white, fontSize: 16),
+                    return Container(
+                      margin: EdgeInsets.symmetric(vertical: 5),
+                      child: messageCompent(message),
                     );
                   }).toList();
 
@@ -250,9 +250,12 @@ class _BodyChatState extends State<BodyChat> {
 
                   if (index <
                       groupMessagesByDate(widget.messages!).length - 1) {
-                    columnChildren.add(Divider(
-                      color: Colors.grey[300],
-                      height: 0,
+                    columnChildren.add(Container(
+                      margin: EdgeInsets.symmetric(vertical: 10),
+                      child: Divider(
+                        color: Colors.grey[300],
+                        height: 0,
+                      ),
                     ));
                   }
 
@@ -321,6 +324,18 @@ class _BodyChatState extends State<BodyChat> {
           ),
         ],
       ),
+    );
+  }
+
+  Widget messageCompent(MessageModel message) {
+    return BubbleSpecialThree(
+      text: message.body ?? '',
+      color: message.senderId == widget.conversation.user_id
+          ? Color(0xFF1B97F3)
+          : Color.fromARGB(255, 94, 94, 97),
+      tail: true,
+      isSender: message.senderId == widget.conversation.user_id,
+      textStyle: TextStyle(color: Colors.white, fontSize: 16),
     );
   }
 }

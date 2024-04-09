@@ -18,7 +18,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
     ScaffoldState scaffoldState = Scaffold.of(context);
     return AppBar(
       toolbarHeight: 57,
-      backgroundColor: lightBG,
+      // backgroundColor: lightBG,
       elevation: 0,
       leading: GestureDetector(
         onTap: () {

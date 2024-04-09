@@ -1,85 +1,185 @@
+import 'package:find_v2/components/TextComponent.dart';
 import 'package:find_v2/components/bottomNav.dart';
 import 'package:find_v2/controller/UserController.dart';
 import 'package:find_v2/model/userModel.dart';
 import 'package:find_v2/utils/assets.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:find_v2/views/profile/widgets/_ProfileHeaderDelegate.dart';
 
-class ProfileUser extends GetView<UserController> {
-  // Add a variable to hold the user's profile picture (replace with your image path)
-  final String userPicture = 'path/to/user/picture.jpg';
+class Profile extends StatefulWidget {
+  const Profile({super.key});
 
   @override
+  State<Profile> createState() => _ProfileState();
+}
+
+class _ProfileState extends State<Profile> {
+  final String userPicture = 'path/to/user/picture.jpg';
+
+  var user = Get.find<UserController>().userGet.value;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(
-        slivers: <Widget>[
-          SliverFillRemaining(
-            child: SingleChildScrollView(
-              // Allow scrolling for long profiles
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  children: [
-                    // List of profile sections
-                    buildProfileSections(),
-
-                    // Divider line
-                    const Divider(thickness: 1),
-
-                    // Logout button
-                    buildLogoutButton(),
+      body: Stack(
+        children: <Widget>[
+          Column(
+            children: <Widget>[
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.25,
+                child: AppBar(
+                  backgroundColor: Colors.blue, // Couleur de fond de l'AppBar
+                  actions: <Widget>[
+                    IconButton(
+                      icon: Icon(Icons.notifications),
+                      onPressed: () {
+                        // Gérer l'appui sur l'icône de notification
+                      },
+                    ),
                   ],
                 ),
               ),
+              Expanded(
+                child: ListView(
+                  children: buildProfileSections2(context),
+                ),
+              ),
+            ],
+          ),
+          Positioned(
+            top: 100, // Ajustez cette valeur pour positionner le profil
+            left: 20.0,
+            child: Row(
+              children: <Widget>[
+                CircleAvatar(
+                  backgroundImage: NetworkImage(images[0]),
+                  radius: 50.0,
+                ),
+                SizedBox(width: 10), // Espacement entre la photo et le nom
+                Text(user.name),
+              ],
             ),
           ),
         ],
       ),
-      bottomSheet: BottomNav(),
+      bottomNavigationBar: BottomNav(),
     );
   }
 
-  // Build profile sections list
-  Widget buildProfileSections() {
-    return Column(
-      children: [
-        ListTile(
-          title: const Text('Edit Profile'),
-          leading: const Icon(Icons.edit),
-          onTap: () {
-            // Handle edit profile action (navigation to edit screen)
-          },
+  List<Widget> buildProfileSections2(context) {
+    final double height = MediaQuery.of(context).size.height;
+    final double width = MediaQuery.of(context).size.width;
+    return [
+      const Padding(
+        padding: EdgeInsets.all(10),
+        child: TextComponent(
+          text: 'Profile',
+          size: 15,
         ),
-        ListTile(
-          title: const Text('Orders'),
-          leading: const Icon(Icons.list),
-          onTap: () {
-            // Handle view orders action (navigation to orders screen)
-          },
+      ),
+      Container(
+        margin: EdgeInsets.symmetric(horizontal: 10),
+        decoration: BoxDecoration(
+            color: Colors.grey.shade900,
+            borderRadius: BorderRadius.all(Radius.circular(10))),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            buildSectionGroup('Mes transactions', Icons.monetization_on, () {}),
+            Container(
+              padding: EdgeInsets.only(left: width * 0.14),
+              child: Divider(height: 5),
+            ),
+            buildSectionGroup('Mes Commandes', Icons.shopping_cart, () {}),
+            Container(
+              padding: EdgeInsets.only(left: width * 0.14),
+              child: Divider(height: 5),
+            ),
+            buildSectionGroup('Missions', Icons.assignment, () {}),
+            Container(
+              padding: EdgeInsets.only(left: width * 0.14),
+              child: Divider(height: 5),
+            ),
+            buildSectionGroup('Parainage', Icons.group, () {}),
+          ],
         ),
-        ListTile(
-          title: const Text('Transactions'),
-          leading: const Icon(Icons.monetization_on),
-          onTap: () {
-            // Handle view transactions action (navigation to transactions screen)
-          },
+      ),
+      const SizedBox(height: 20),
+      const Padding(
+        padding: EdgeInsets.all(10),
+        child: TextComponent(
+          text: 'Parametres',
+          size: 15,
         ),
-        // Add more list tiles for other sections
-      ],
-    );
+      ),
+      Container(
+        margin: EdgeInsets.symmetric(horizontal: 10),
+        decoration: BoxDecoration(
+            color: Colors.grey.shade900,
+            borderRadius: BorderRadius.all(Radius.circular(10))),
+        child: Column(
+          children: [
+            buildSectionGroup('Mes Preferences', Icons.settings, () {}),
+            Container(
+              padding: EdgeInsets.only(left: width * 0.14),
+              child: Divider(height: 5),
+            ),
+            buildSectionGroup('Compte', Icons.account_circle, () {}),
+          ],
+        ),
+      ),
+      const SizedBox(height: 20),
+      const Padding(
+        padding: EdgeInsets.all(10),
+        child: TextComponent(
+          text: 'Resources',
+          size: 15,
+        ),
+      ),
+      Container(
+        margin: EdgeInsets.symmetric(horizontal: 10),
+        decoration: BoxDecoration(
+            color: Colors.grey.shade900,
+            borderRadius: BorderRadius.all(Radius.circular(10))),
+        child: Column(
+          children: [
+            buildSectionGroup('Support', Icons.help, () {}),
+            Container(
+              padding: EdgeInsets.only(left: width * 0.14),
+              child: Divider(height: 5),
+            ),
+            buildSectionGroup('Community and legal', Icons.gavel, () {}),
+          ],
+        ),
+      ),
+      SizedBox(
+        height: 20,
+      ),
+      Center(
+        child: Text('version 11'),
+      ),
+      SizedBox(
+        height: 20,
+      ),
+    ];
   }
 
-  // Build logout button
-  Widget buildLogoutButton() {
-    return ElevatedButton(
-      onPressed: () {
-        controller.logout();
-      },
-      child: const Text('Logout'),
+  // Méthode pour créer un groupe de section avec une icône et une action
+  Widget buildSectionGroup(String title, IconData icon, VoidCallback onTap) {
+    return ListTile(
+      title: TextComponent(
+        text: title,
+        size: 14,
+      ),
+      leading: Icon(icon),
+      onTap: onTap,
+      trailing: Icon(Icons.arrow_forward_ios, size: 15),
     );
   }
 }
-
-// Classe pour définir le delegate de l'en-tête persistant

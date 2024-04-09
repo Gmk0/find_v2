@@ -1,6 +1,11 @@
+import 'package:find_v2/components/TextName.dart';
+import 'package:find_v2/components/netWorkImage.dart';
 import 'package:find_v2/model/serviceModel.dart';
+import 'package:find_v2/utils/assets.dart';
 import 'package:find_v2/utils/theme.dart';
+import 'package:find_v2/utils/theme2.dart';
 import 'package:find_v2/views/service/OneService.dart';
+import 'package:find_v2/views/service/OneServiceView.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,26 +16,27 @@ class ServiceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String link = '';
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Stack(alignment: Alignment.topRight, children: [
           Container(
-            height: 140.0,
-            //width: 190.0,
-            decoration: const BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(10),
-                topRight: Radius.circular(10),
+              height: MediaQuery.of(context).size.height * 0.16,
+              //width: 190.0,
+              decoration: BoxDecoration(
+                color: ThemeDarkBackground.getBackgroundColor(context),
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  topRight: Radius.circular(10),
+                ),
               ),
-              image: DecorationImage(
-                image: AssetImage(
-                    'assets/images/ff3.png'), // Remplacez par l'image de l'utilisateur
+              child: PNetworkImage(
+                service.media != null && service.media!.isNotEmpty
+                    ? service.media![0].url
+                    : images[0],
                 fit: BoxFit.cover,
-              ),
-            ),
-          ),
+              )),
           IconButton(
             onPressed: () {},
             icon: Icon(
@@ -45,28 +51,29 @@ class ServiceCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Row(
                       children: [
                         CircleAvatar(
                           radius: 15,
-                          backgroundImage: AssetImage(
-                              'assets/images/ff3.png'), // Remplacez par l'image de l'utilisateur
+                          backgroundImage: NetworkImage(
+                              service.freelance.user.profilePhotoPath),
+                          // Remplacez par l'image de l'utilisateur
                         ),
                         SizedBox(width: 5),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              'bro', // Ajoutez le nom de l'utilisateur ici
-                              style:
-                                  TextStyle(fontSize: 11.0, color: Colors.grey),
+                            TextName(
+                              name: service.freelance.user.name,
+                              size: 12,
+                              taille: 14, // Ajoutez le nom de l'utilisateur ici
                             ),
                             Text(
-                              'level 4', // Ajoutez le nom de l'utilisateur ici
+                              'Niveau ${service.freelance.level}', // Ajoutez le nom de l'utilisateur ici
                               style:
                                   TextStyle(fontSize: 11.0, color: Colors.grey),
                             ),
@@ -82,7 +89,7 @@ class ServiceCard extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 15),
                     child: GestureDetector(
                       onTap: () {
-                        Get.to(OneService(service: service));
+                        Get.to(oneServiceView());
                       },
                       child: Text(
                         service.title,

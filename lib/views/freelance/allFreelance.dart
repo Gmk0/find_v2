@@ -8,8 +8,6 @@ import 'package:find_v2/model/categoryMode.dart';
 import 'package:find_v2/utils/theme.dart';
 import 'package:find_v2/utils/theme2.dart';
 import 'package:find_v2/views/category/TestCategory.dart';
-import 'package:find_v2/views/category/widgets/FilterScreen.dart';
-import 'package:find_v2/views/category/widgets/ServiceListeView.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -49,8 +47,9 @@ class _AllFreelanceState extends State<AllFreelance>
 
   @override
   Widget build(BuildContext context) {
+    final Color backgroundColor =
+        ThemeDarkBackground.getBackgroundColor(context);
     return Scaffold(
-      backgroundColor: Colors.white,
       body: Stack(
         children: [
           InkWell(
@@ -63,7 +62,7 @@ class _AllFreelanceState extends State<AllFreelance>
             },
             child: Column(
               children: [
-                getAppBarUI(),
+                getAppBarUI(backgroundColor),
                 Expanded(
                   child: NestedScrollView(
                     controller: _scrollController,
@@ -75,7 +74,7 @@ class _AllFreelanceState extends State<AllFreelance>
                               (BuildContext context, int index) {
                             return Column(
                               children: <Widget>[
-                                getSearchBarUI(),
+                                getSearchBarUI(backgroundColor),
                                 // getTimeDateUI(),
                               ],
                             );
@@ -85,46 +84,43 @@ class _AllFreelanceState extends State<AllFreelance>
                           pinned: true,
                           floating: true,
                           delegate: ContestTabHeader(
-                            getFilterBarUI(),
+                            getFilterBarUI(backgroundColor),
                           ),
                         ),
                       ];
                     },
-                    body: Container(
-                        color:
-                            FindTheme.buildLightTheme().colorScheme.background,
-                        child: Obx(() {
-                          final freelances = serviceController.freelancesAll;
+                    body: Container(child: Obx(() {
+                      final freelances = serviceController.freelancesAll;
 
-                          if (freelances.isEmpty) {
-                            return Container(
-                                child: Center(
-                              child: Text("Aucun service disponible"),
-                            ));
-                          } else {
-                            return ListView.builder(
-                              itemCount: freelances.length,
-                              padding: const EdgeInsets.only(top: 8),
-                              itemBuilder: (BuildContext context, int index) {
-                                final int count = freelances.length;
-                                final freelance = freelances[index];
-                                final Animation<double> animation =
-                                    Tween<double>(begin: 0.0, end: 1.0).animate(
-                                        CurvedAnimation(
-                                            parent: animationController,
-                                            curve: Interval(
-                                                (1 / count) * index, 1.0,
-                                                curve: Curves.fastOutSlowIn)));
-                                animationController.forward();
-                                return FreelanceListView(
-                                    freelance: freelance,
-                                    animation: animation,
-                                    animationController: animationController,
-                                    callback: () {});
-                              },
-                            );
-                          }
-                        })),
+                      if (freelances.isEmpty) {
+                        return Container(
+                            child: Center(
+                          child: Text("Aucun service disponible"),
+                        ));
+                      } else {
+                        return ListView.builder(
+                          itemCount: freelances.length,
+                          padding: const EdgeInsets.only(top: 8),
+                          itemBuilder: (BuildContext context, int index) {
+                            final int count = freelances.length;
+                            final freelance = freelances[index];
+                            final Animation<double> animation =
+                                Tween<double>(begin: 0.0, end: 1.0).animate(
+                                    CurvedAnimation(
+                                        parent: animationController,
+                                        curve: Interval(
+                                            (1 / count) * index, 1.0,
+                                            curve: Curves.fastOutSlowIn)));
+                            animationController.forward();
+                            return FreelanceListView(
+                                freelance: freelance,
+                                animation: animation,
+                                animationController: animationController,
+                                callback: () {});
+                          },
+                        );
+                      }
+                    })),
                   ),
                 )
               ],
@@ -135,10 +131,10 @@ class _AllFreelanceState extends State<AllFreelance>
     );
   }
 
-  Widget getAppBarUI() {
+  Widget getAppBarUI(Color background) {
     return Container(
       decoration: BoxDecoration(
-        color: FindTheme.buildLightTheme().colorScheme.background,
+        color: background,
         boxShadow: <BoxShadow>[
           BoxShadow(
               color: Colors.grey.withOpacity(0.2),
@@ -191,7 +187,7 @@ class _AllFreelanceState extends State<AllFreelance>
     );
   }
 
-  Widget getSearchBarUI() {
+  Widget getSearchBarUI(Color backgroundColor) {
     return Padding(
       padding: const EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 8),
       child: Row(
@@ -201,7 +197,7 @@ class _AllFreelanceState extends State<AllFreelance>
               padding: const EdgeInsets.only(right: 16, top: 8, bottom: 8),
               child: Container(
                 decoration: BoxDecoration(
-                  color: FindTheme.buildLightTheme().colorScheme.background,
+                  color: backgroundColor,
                   borderRadius: const BorderRadius.all(
                     Radius.circular(38.0),
                   ),
@@ -268,7 +264,7 @@ class _AllFreelanceState extends State<AllFreelance>
     );
   }
 
-  Widget getFilterBarUI() {
+  Widget getFilterBarUI(Color backgroundColor) {
     return Obx(() {
       final freelance = serviceController.freelancesAll;
       return Stack(
@@ -280,10 +276,10 @@ class _AllFreelanceState extends State<AllFreelance>
             child: Container(
               height: 24,
               decoration: BoxDecoration(
-                color: FindTheme.buildLightTheme().colorScheme.background,
+                color: backgroundColor,
                 boxShadow: <BoxShadow>[
                   BoxShadow(
-                      color: Colors.grey.withOpacity(0.2),
+                      //color: Colors.grey.withOpacity(0.2),
                       offset: const Offset(0, -2),
                       blurRadius: 8.0),
                 ],
@@ -291,7 +287,7 @@ class _AllFreelanceState extends State<AllFreelance>
             ),
           ),
           Container(
-            color: FindTheme.buildLightTheme().colorScheme.background,
+            color: backgroundColor,
             child: Padding(
               padding:
                   const EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 4),

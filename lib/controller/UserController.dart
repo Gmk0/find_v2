@@ -26,7 +26,6 @@ class UserController extends GetxController {
 
   @override
   void onInit() {
-    fetchUser();
     super.onInit();
   }
 
@@ -44,6 +43,11 @@ class UserController extends GetxController {
       } else {
         // Gérer l'erreur de récupération de l'utilisateur
         print('Error fetching user: Status code ${response.statusCode}');
+
+        await clearUserData();
+
+        // Rediriger vers la page de connexion
+        Get.offAllNamed('/getStarted');
       }
     } catch (error) {
       // Gérer l'erreur de réseau

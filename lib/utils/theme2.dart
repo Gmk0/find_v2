@@ -119,3 +119,17 @@ class FindTheme {
       black = Colors.black,
       darkThemeColor = skinFill;
 }
+
+class ThemeDarkBackground {
+  static Color getBackgroundColor(BuildContext context) {
+    final Brightness brightness = Theme.of(context).brightness;
+    return brightness == Brightness.dark ? Colors.grey[900]! : Colors.white;
+  }
+
+  static Color getTextColor(BuildContext context) {
+    final Brightness brightness = Theme.of(context).brightness;
+    return brightness == Brightness.dark
+        ? Colors.grey.shade100
+        : Colors.grey.shade900;
+  }
+}

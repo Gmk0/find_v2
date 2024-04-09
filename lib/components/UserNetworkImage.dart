@@ -1,11 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-class PNetworkImage extends StatelessWidget {
+class UserNetworkImage extends StatelessWidget {
   final String image;
   final BoxFit? fit;
   final double? width, height;
-  const PNetworkImage(this.image, {Key? key, this.fit, this.height, this.width})
+  const UserNetworkImage(this.image,
+      {Key? key, this.fit, this.height, this.width})
       : super(key: key);
 
   @override
@@ -16,7 +17,7 @@ class PNetworkImage extends StatelessWidget {
       placeholder: (context, url) =>
           const Center(child: CircularProgressIndicator()),
       errorWidget: (context, url, error) => Image.asset(
-        'assets/images/ff3.png',
+        'assets/images/user.svg',
         fit: BoxFit.cover,
       ),
       fit: fit,

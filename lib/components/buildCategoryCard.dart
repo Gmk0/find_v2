@@ -30,8 +30,7 @@ class BuildCategoryCard extends StatelessWidget {
                     width: 160,
                     height: 160,
                     child: PNetworkImage(
-                      // controller.category[index].media.isNotEmpty? controller.category[index].media[0].url
-                      link,
+                      category.media.isNotEmpty ? category.media[0].url : link,
                       fit: BoxFit.cover,
                     ),
                   ),

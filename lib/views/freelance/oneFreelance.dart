@@ -1,5 +1,8 @@
+import 'package:find_v2/components/TextComponent.dart';
+import 'package:find_v2/model/freelanceModel.dart';
 import 'package:find_v2/utils/assets.dart';
 import 'package:find_v2/utils/theme.dart';
+import 'package:find_v2/utils/theme2.dart';
 import 'package:find_v2/views/service/widgets/ListeServiceUser.dart';
 import 'package:find_v2/views/service/widgets/OnePortFolio.dart';
 import 'package:flutter/material.dart';
@@ -17,8 +20,9 @@ class Artwork {
 }
 
 class UserProfilePage extends StatefulWidget {
-  const UserProfilePage({Key? key}) : super(key: key);
+  const UserProfilePage({Key? key, required this.freelance}) : super(key: key);
 
+  final FreelanceModel freelance;
   @override
   State<UserProfilePage> createState() => _UserProfilePageState();
 }
@@ -64,7 +68,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
           slivers: [
             SliverAppBar(
               expandedHeight: 200.0,
-              title: _showTitle ? Text('User') : null,
+              title: _showTitle ? Text(widget.freelance.user.name) : null,
               floating: true,
               pinned: true,
               snap: true,
@@ -87,7 +91,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                 //centerTitle: true,
 
                 background: Image.network(
-                  images[0],
+                  widget.freelance.user.profilePhotoPath,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -104,13 +108,12 @@ class _UserProfilePageState extends State<UserProfilePage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        _buildInfoRow('Nom', 'John Doe', Icons.person),
                         _buildInfoRow(
-                            'Catégorie', 'Développeur', Icons.category),
+                            'Nom', widget.freelance.nomComplet, Icons.person),
+                        _buildInfoRow('Catégorie',
+                            widget.freelance.categoryName, Icons.category),
                         // _buildInfoRow('Étoiles', '4.5', Icons.star),
                         _buildInfoRow('Taux', '\$1000', Icons.attach_money),
-                        _buildInfoRow(
-                            'Localisation', 'New York, USA', Icons.location_on),
                       ],
                     ),
                   ),
@@ -201,89 +204,83 @@ class _UserProfilePageState extends State<UserProfilePage> {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: ReadMoreText(
-              'Description du service. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit amet pretium urna. Donec aliquam neque ac tortor aliquam, sed ultricies eros ultricies. Fusce tincidunt massa sit amet neque tincidunt, sed tincidunt elit ultricies. Nam eget nibh euismod, tincidunt libero a, ultrices diam. Maecenas eget lacus ut enim hendrerit ultricies. Maecenas sit amet lectus euismod, ultricies risus eget, ultricies nibh.',
+              widget.freelance.description,
               trimLines: 4,
               colorClickableText: const Color(0xFF5F67EA),
               trimMode: TrimMode.Line,
               trimCollapsedText: 'Plus',
               trimExpandedText: ' Réduire',
               style: TextStyle(
-                color: Colors.grey.withOpacity(0.7),
+                color: ThemeDarkBackground.getTextColor(context),
                 height: 1.5,
               ),
             ),
           ),
           const SizedBox(height: 5),
-          const Text(
-            'Éducation',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
+          const TextComponent(
+            text: 'Éducation',
+            size: 16,
+            fw: FontWeight.bold,
           ),
           const SizedBox(height: 5),
           Column(
             children: [
-              Padding(
-                padding: EdgeInsets.all(16.0),
-                child: Text(
-                  'Nom de l\'école / Université - Diplôme obtenu (Année)',
-                  style: TextStyle(
-                      fontSize: 14, color: Colors.grey.withOpacity(0.7)),
-                ),
-              )
+              ...widget.freelance.diplomes!.map((e) => Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Text(
+                      '${e.universite} - ${e.diplome} (${(e.annee)})',
+                      style: TextStyle(
+                          fontSize: 14,
+                          color: ThemeDarkBackground.getTextColor(context)),
+                    ),
+                  ))
             ],
           ),
           const SizedBox(height: 10),
-          const Text(
-            'Certificats',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
+          const TextComponent(
+            text: 'Certificats',
+            size: 16,
+            fw: FontWeight.bold,
           ),
           const SizedBox(height: 5),
           Column(
             children: [
-              Padding(
-                padding: EdgeInsets.all(16.0),
-                child: Text(
-                  'Nom de l\'école / Université - Diplôme obtenu (Année)',
-                  style: TextStyle(
-                      fontSize: 14, color: Colors.grey.withOpacity(0.7)),
-                ),
-              )
+              ...widget.freelance.certificats!.map((e) => Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Text(
+                      '${e.delivrer} - ${e.certifier} (${(e.annee)})',
+                      style: TextStyle(
+                          fontSize: 14,
+                          color: ThemeDarkBackground.getTextColor(context)),
+                    ),
+                  ))
             ],
           ),
           const SizedBox(height: 20),
-          const Text(
-            'Informations',
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
+          const TextComponent(
+            text: 'Informations',
+            size: 16,
+            fw: FontWeight.bold,
           ),
           const SizedBox(height: 5),
-          _listeTitle('Lieu: Ville, Pays', Icons.location_on),
+          _listeTitle(
+              'Lieu: ${widget.freelance.localisation?.ville}, ${widget.freelance.localisation?.commune}',
+              Icons.location_on),
           _listeTitle('Temps de réponse: 24h', Icons.access_time),
           _listeTitle('Membre depuis: 01/01/2022', Icons.calendar_today),
           const SizedBox(height: 20),
-          const Text(
-            'Langues',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
+          const TextComponent(
+            text: 'Langues',
+            size: 16,
+            fw: FontWeight.bold,
           ),
           SizedBox(height: 5),
-          Wrap(
-            spacing: 8.0,
-            children: [
-              Chip(label: Text('Français')),
-              Chip(label: Text('Anglais')),
-              Chip(label: Text('Espagnol')),
-            ],
-          ),
+          Wrap(spacing: 8.0, children: [
+            ...widget.freelance.langues!.map((e) => Padding(
+                  padding: EdgeInsets.all(5),
+                  child: Chip(label: Text(e.langue!)),
+                ))
+          ]),
           const SizedBox(height: 20),
           Text(
             'Compétences',
@@ -293,15 +290,12 @@ class _UserProfilePageState extends State<UserProfilePage> {
             ),
           ),
           const SizedBox(height: 5),
-          Wrap(
-            spacing: 8.0,
-            children: List.generate(3, (index) {
-              return Padding(
-                padding: EdgeInsets.all(5),
-                child: Chip(label: Text('Compétence ${index + 1}')),
-              );
-            }),
-          ),
+          Wrap(spacing: 8.0, children: [
+            ...widget.freelance.subcategories!.map((e) => Padding(
+                  padding: EdgeInsets.all(5),
+                  child: Chip(label: Text(e.name)),
+                ))
+          ]),
         ],
       ),
     );

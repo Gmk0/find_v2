@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:find_v2/binding/allntialBinding.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -19,18 +20,25 @@ class _SplashScreenState extends State<SplashScreen> {
     isLogin();
   }
 
+  Future<void> loadEssential() async {
+    AllIntialBinding().loadDependencies();
+  }
+
   void isLogin() async {
     SharedPreferences sp = await SharedPreferences.getInstance();
-    bool? isLogin = sp.getBool('isLogin') ?? false;
+    bool? _isLogin = sp.getBool('isLogin') ?? false;
 
-    if (isLogin) {
-      Timer(const Duration(seconds: 5), () {
+    String? _token = sp.getString('token') ?? null;
+
+    if (_isLogin && _token != null) {
+      loadEssential();
+      Timer(const Duration(seconds: 3), () {
         Get.offAndToNamed(
           '/home',
         );
       });
     } else {
-      Timer(const Duration(seconds: 5), () {
+      Timer(const Duration(seconds: 3), () {
         Get.offAndToNamed(
           '/getStarted',
         );

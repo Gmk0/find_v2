@@ -22,7 +22,7 @@ class ConversationModel {
       required this.user_id,
       required this.status,
       required this.id,
-      required this.is_blocked,
+      //required this.is_blocked,
       required this.user,
       required this.freelance,
       required this.created_at,
@@ -39,7 +39,7 @@ class ConversationModel {
         last_time_message: DateTime.parse(json['last_time_message']),
         status: json['status'],
         id: json['id'],
-        is_blocked: json['is_blocked'],
+        // is_blocked: json['is_blocked'],
         created_at: json['created_at'],
         allMessages: (json['allMessages'] as List<dynamic>?)
             ?.map((message) => MessageModel.fromJson(message))

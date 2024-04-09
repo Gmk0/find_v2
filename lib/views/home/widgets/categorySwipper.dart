@@ -1,3 +1,4 @@
+import 'package:find_v2/components/TextComponent.dart';
 import 'package:find_v2/components/appStyle.dart';
 import 'package:find_v2/components/netWorkImage.dart';
 import 'package:find_v2/components/reusableText.dart';
@@ -30,13 +31,10 @@ class CategorySwipper extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    ReusableText(
+                    const TextComponent(
                       text: "Catégories",
-                      style: appStyle(
-                        20,
-                        Colors.grey.shade800,
-                        FontWeight.bold,
-                      ),
+                      size: 18,
+                      fw: FontWeight.bold,
                     ),
                     GestureDetector(
                       onTap: () {
@@ -78,8 +76,11 @@ class CategorySwipper extends StatelessWidget {
                                       width: 160,
                                       height: 180,
                                       child: PNetworkImage(
-                                        // controller.category[index].media.isNotEmpty? controller.category[index].media[0].url
-                                        link,
+                                        controller.category[index].media
+                                                .isNotEmpty
+                                            ? controller
+                                                .category[index].media[0].url
+                                            : link,
                                         fit: BoxFit.cover,
                                       ),
                                     ),

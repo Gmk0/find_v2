@@ -24,7 +24,7 @@ class OneService extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       // Nombre d'onglets
-      backgroundColor: Colors.grey.shade200,
+      //backgroundColor: Colors.grey.shade200,
 
       body: CustomScrollView(
         slivers: [

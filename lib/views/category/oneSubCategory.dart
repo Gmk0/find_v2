@@ -50,7 +50,6 @@ class _OneSubCategoryState extends State<OneSubCategory>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       body: Stack(
         children: [
           InkWell(
@@ -63,7 +62,7 @@ class _OneSubCategoryState extends State<OneSubCategory>
             },
             child: Column(
               children: [
-                getAppBarUI(),
+                getAppBarUI(ThemeDarkBackground.getBackgroundColor(context)),
                 Expanded(
                   child: NestedScrollView(
                     controller: _scrollController,
@@ -75,7 +74,9 @@ class _OneSubCategoryState extends State<OneSubCategory>
                               (BuildContext context, int index) {
                             return Column(
                               children: <Widget>[
-                                getSearchBarUI(),
+                                getSearchBarUI(
+                                    ThemeDarkBackground.getBackgroundColor(
+                                        context)),
                                 // getTimeDateUI(),
                               ],
                             );
@@ -85,43 +86,43 @@ class _OneSubCategoryState extends State<OneSubCategory>
                           pinned: true,
                           floating: true,
                           delegate: ContestTabHeader(
-                            getFilterBarUI(servicesOhter.length.toString()),
+                            getFilterBarUI(
+                                context, servicesOhter.length.toString()),
                           ),
                         ),
                       ];
                     },
                     body: Container(
-                        color:
-                            FindTheme.buildLightTheme().colorScheme.background,
+                        // color: ThemeDarkBackground.getBackgroundColor(context),
                         child: Obx(() {
-                          final services = serviceController
-                              .getServicesBySousCategorie(widget.subcategory);
+                      final services = serviceController
+                          .getServicesBySousCategorie(widget.subcategory);
 
-                          if (services.isEmpty) {
-                            return Container();
-                          } else {
-                            return ListView.builder(
-                              itemCount: services.length,
-                              padding: const EdgeInsets.only(top: 8),
-                              itemBuilder: (BuildContext context, int index) {
-                                final int count = services.length;
-                                final Animation<double> animation =
-                                    Tween<double>(begin: 0.0, end: 1.0).animate(
-                                        CurvedAnimation(
-                                            parent: animationController,
-                                            curve: Interval(
-                                                (1 / count) * index, 1.0,
-                                                curve: Curves.fastOutSlowIn)));
-                                animationController.forward();
-                                return ServiceListView(
-                                    service: services[index],
-                                    animationController: animationController,
-                                    animation: animation,
-                                    callback: () {});
-                              },
-                            );
-                          }
-                        })),
+                      if (services.isEmpty) {
+                        return Container();
+                      } else {
+                        return ListView.builder(
+                          itemCount: services.length,
+                          padding: const EdgeInsets.only(top: 8),
+                          itemBuilder: (BuildContext context, int index) {
+                            final int count = services.length;
+                            final Animation<double> animation =
+                                Tween<double>(begin: 0.0, end: 1.0).animate(
+                                    CurvedAnimation(
+                                        parent: animationController,
+                                        curve: Interval(
+                                            (1 / count) * index, 1.0,
+                                            curve: Curves.fastOutSlowIn)));
+                            animationController.forward();
+                            return ServiceListView(
+                                service: services[index],
+                                animationController: animationController,
+                                animation: animation,
+                                callback: () {});
+                          },
+                        );
+                      }
+                    })),
                   ),
                 )
               ],
@@ -132,13 +133,13 @@ class _OneSubCategoryState extends State<OneSubCategory>
     );
   }
 
-  Widget getAppBarUI() {
+  Widget getAppBarUI(Color backgroundColor) {
     return Container(
       decoration: BoxDecoration(
-        color: FindTheme.buildLightTheme().colorScheme.background,
+        color: backgroundColor,
         boxShadow: <BoxShadow>[
           BoxShadow(
-              color: Colors.grey.withOpacity(0.2),
+              //color: Colors.grey.withOpacity(0.2),
               offset: const Offset(0, 2),
               blurRadius: 8.0),
         ],
@@ -199,7 +200,7 @@ class _OneSubCategoryState extends State<OneSubCategory>
     );
   }
 
-  Widget getSearchBarUI() {
+  Widget getSearchBarUI(Color backgroundColor) {
     return Padding(
       padding: const EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 8),
       child: Row(
@@ -209,13 +210,13 @@ class _OneSubCategoryState extends State<OneSubCategory>
               padding: const EdgeInsets.only(right: 16, top: 8, bottom: 8),
               child: Container(
                 decoration: BoxDecoration(
-                  color: FindTheme.buildLightTheme().colorScheme.background,
+                  color: backgroundColor,
                   borderRadius: const BorderRadius.all(
                     Radius.circular(38.0),
                   ),
                   boxShadow: <BoxShadow>[
                     BoxShadow(
-                        color: Colors.grey.withOpacity(0.2),
+                        //color: Colors.grey.withOpacity(0.2),
                         offset: const Offset(0, 2),
                         blurRadius: 8.0),
                   ],
@@ -276,7 +277,7 @@ class _OneSubCategoryState extends State<OneSubCategory>
     );
   }
 
-  Widget getFilterBarUI(String count) {
+  Widget getFilterBarUI(BuildContext context, String count) {
     return Stack(
       children: <Widget>[
         Positioned(
@@ -286,7 +287,7 @@ class _OneSubCategoryState extends State<OneSubCategory>
           child: Container(
             height: 24,
             decoration: BoxDecoration(
-              color: FindTheme.buildLightTheme().colorScheme.background,
+              color: ThemeDarkBackground.getBackgroundColor(context),
               boxShadow: <BoxShadow>[
                 BoxShadow(
                     color: Colors.grey.withOpacity(0.2),
@@ -297,7 +298,7 @@ class _OneSubCategoryState extends State<OneSubCategory>
           ),
         ),
         Container(
-          color: FindTheme.buildLightTheme().colorScheme.background,
+          color: ThemeDarkBackground.getBackgroundColor(context),
           child: Padding(
             padding:
                 const EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 4),

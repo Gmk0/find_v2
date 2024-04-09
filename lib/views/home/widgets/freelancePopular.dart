@@ -1,4 +1,5 @@
 import 'package:find_v2/components/FreelanceCard.dart';
+import 'package:find_v2/components/TextComponent.dart';
 import 'package:find_v2/components/appStyle.dart';
 import 'package:find_v2/components/reusableText.dart';
 import 'package:find_v2/controller/ServiceController.dart';
@@ -27,13 +28,10 @@ class FreelancePopular extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  ReusableText(
+                  const TextComponent(
                     text: "Freelance Populaire",
-                    style: appStyle(
-                      20,
-                      Colors.grey.shade800,
-                      FontWeight.bold,
-                    ),
+                    size: 18,
+                    fw: FontWeight.bold,
                   ),
                   GestureDetector(
                     onTap: () {
@@ -53,7 +51,7 @@ class FreelancePopular extends StatelessWidget {
               ),
             ),
             Container(
-              height: 280,
+              height: MediaQuery.of(context).size.height * 0.35,
               width: double.infinity,
               child: ListView.separated(
                 padding: const EdgeInsets.symmetric(horizontal: 10),

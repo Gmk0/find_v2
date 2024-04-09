@@ -42,10 +42,11 @@ class ChatController extends GetxController {
             .sort((a, b) => b.last_time_message.compareTo(a.last_time_message));
         // print(conversations.value);
       } else {
-        print('Erreur lors de la récupération des données');
+        print(response.statusCode);
+        //print('Erreur lors de la récupération des données');
       }
     } catch (e) {
-      print('les erreurs' + e.toString());
+      print('erreurs  chat' + e.toString());
     }
   }
 

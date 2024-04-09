@@ -2,7 +2,6 @@ import 'package:find_v2/components/netWorkImage.dart';
 import 'package:find_v2/components/swiper_pagination.dart';
 import 'package:find_v2/utils/assets.dart';
 import 'package:find_v2/views/auth/login.dart';
-import 'package:find_v2/views/auth/loginScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper_null_safety_flutter3/flutter_swiper_null_safety_flutter3.dart';
 import 'package:get/get.dart';
@@ -18,7 +17,7 @@ class GetStarted extends StatefulWidget {
 class _GetStartedState extends State<GetStarted> {
   final SwiperController _swiperController = SwiperController();
 
-  final List<String> titles = [
+  final List<String> _titles = [
     "Trouvez des professionnels qualifiés.",
     "Connectez-vous avec des freelances compétents.",
     "Découvrez une nouvelle façon de trouver des talents.",
@@ -53,7 +52,7 @@ class _GetStartedState extends State<GetStarted> {
                   loop: false,
                   itemBuilder: (context, index) {
                     return _buildPage(
-                        title: titles[index], icon: images[index]);
+                        title: _titles[index], icon: imagesSplash[index]);
                   },
                   pagination: SwiperPagination(
                       builder: CustomPaginationBuilder(
@@ -123,7 +122,7 @@ class _GetStartedState extends State<GetStarted> {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30.0),
           image: DecorationImage(
-              image: NetworkImage(icon),
+              image: AssetImage(icon),
               fit: BoxFit.cover,
               colorFilter:
                   const ColorFilter.mode(Colors.black38, BlendMode.multiply)),

@@ -14,7 +14,7 @@ class AllIntialBinding implements Bindings {
     Get.put<PageControllerView>(PageControllerView());
     Get.put<ChatController>(ChatController());
     //Get.lazyPut<ChatController>(() => ChatController());
-    Get.lazyPut<UserController>(() => UserController());
+    //Get.lazyPut<UserController>(() => UserController());
     Get.put<FilterController>(FilterController());
   }
 

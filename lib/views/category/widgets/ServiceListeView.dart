@@ -1,3 +1,4 @@
+import 'package:find_v2/components/netWorkImage.dart';
 import 'package:find_v2/components/reusableText.dart';
 import 'package:find_v2/model/serviceModel.dart';
 import 'package:find_v2/utils/assets.dart';
@@ -29,6 +30,12 @@ class ServiceListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Brightness brightness = Theme.of(context).brightness;
+    final Color backgroundColor =
+        brightness == Brightness.dark ? Colors.grey[900]! : Colors.white;
+    final Color backgroundColorSub =
+        brightness == Brightness.dark ? Colors.black : Colors.white;
+
     return AnimatedBuilder(
       animation: animationController,
       builder: (BuildContext context, _) {
@@ -47,15 +54,15 @@ class ServiceListView extends StatelessWidget {
                     borderRadius: const BorderRadius.all(Radius.circular(16.0)),
                     boxShadow: <BoxShadow>[
                       BoxShadow(
-                        color: Colors.grey.withOpacity(0.6),
+                        //color: Colors.grey.withOpacity(0.6),
                         offset: const Offset(2, 2),
                         blurRadius: 16,
                       ),
                     ],
                   ),
                   child: Container(
-                    decoration: const BoxDecoration(
-                        color: Colors.white,
+                    decoration: BoxDecoration(
+                        color: backgroundColor,
                         borderRadius: BorderRadius.all(Radius.circular(16))),
                     margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                     child: Row(
@@ -73,11 +80,12 @@ class ServiceListView extends StatelessWidget {
                                 topLeft: Radius.circular(10),
                                 topRight: Radius.circular(10),
                               ),
-                              image: DecorationImage(
-                                image: AssetImage(
-                                    appLogo), // Remplacez par l'image de l'utilisateur
-                                fit: BoxFit.contain,
-                              ),
+                            ),
+                            child: PNetworkImage(
+                              service.media != null && service.media!.isNotEmpty
+                                  ? service.media![0].url
+                                  : images[0],
+                              fit: BoxFit.cover,
                             ),
                           ),
                         ]),

@@ -1,4 +1,5 @@
 import 'package:find_v2/components/FreelanceCard.dart';
+import 'package:find_v2/components/TextComponent.dart';
 import 'package:find_v2/components/reusableText.dart';
 import 'package:find_v2/model/freelanceModel.dart';
 import 'package:find_v2/model/serviceModel.dart';
@@ -6,14 +7,11 @@ import 'package:find_v2/utils/assets.dart';
 import 'package:find_v2/utils/theme.dart';
 import 'package:find_v2/utils/theme2.dart';
 import 'package:find_v2/views/freelance/oneFreelance.dart';
-import 'package:find_v2/views/service/OneService.dart';
-import 'package:find_v2/views/service/OneService2.dart';
-import 'package:find_v2/views/service/OneServiceView.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 import 'package:get/get.dart';
 
 class FreelanceListView extends StatelessWidget {
@@ -32,6 +30,12 @@ class FreelanceListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double height = MediaQuery.of(context).size.height;
+    final Brightness brightness = Theme.of(context).brightness;
+    ;
+    final double width = MediaQuery.of(context).size.width;
+    final Color backgroundColorSub =
+        brightness == Brightness.dark ? Colors.black : Colors.white;
     return AnimatedBuilder(
       animation: animationController,
       builder: (BuildContext context, _) {
@@ -45,15 +49,17 @@ class FreelanceListView extends StatelessWidget {
               //width: 200,
               padding: EdgeInsets.all(10),
               child: GestureDetector(
-                onTap: () =>
-                    {Get.to(UserProfilePage(), transition: Transition.fadeIn)},
+                onTap: () => {
+                  Get.to(UserProfilePage(freelance: freelance),
+                      transition: Transition.fadeIn)
+                },
                 child: Container(
                   margin: EdgeInsets.all(20),
                   constraints: BoxConstraints(minHeight: 320, maxHeight: 350),
                   padding: EdgeInsets.all(5),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: Colors.white,
+                    color: ThemeDarkBackground.getBackgroundColor(context),
                     boxShadow: const [
                       BoxShadow(
                         color: Colors.black12,
@@ -69,8 +75,8 @@ class FreelanceListView extends StatelessWidget {
                         children: [
                           Container(
                             margin: EdgeInsets.all(10),
-                            height: 160.0,
-                            width: 240.0,
+                            height: height * 0.2,
+                            width: width * 0.4,
                             child: CircleAvatar(
                               radius: 50,
                               backgroundImage: const AssetImage(
@@ -97,25 +103,20 @@ class FreelanceListView extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Text(
-                                  freelance.nomComplet,
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      color: Colors.grey.shade800),
+                                TextComponent(
+                                  text: freelance.nomComplet,
+                                  size: 16,
                                 ),
-                                Text(
-                                  'Niveau ${freelance.level}',
-                                  style: TextStyle(
-                                      fontSize: 12.0,
-                                      color: Colors.grey.shade800),
+                                TextComponent(
+                                  text: 'Niveau ${freelance.level}',
+                                  size: 12,
                                 ),
                               ],
                             ),
                             const SizedBox(height: 10),
-                            Text(
-                              'Programmation & Tech',
-                              style: TextStyle(
-                                  fontSize: 12.0, color: Colors.grey.shade800),
+                            TextComponent(
+                              text: 'Programmation & Tech',
+                              size: 12,
                             ),
                             const SizedBox(height: 10),
                             Wrap(
@@ -129,8 +130,8 @@ class FreelanceListView extends StatelessWidget {
                                       borderRadius: const BorderRadius.all(
                                           Radius.circular(5)),
                                       // shape: BoxShape.circle,
-                                      color: Colors.grey
-                                          .shade200, // Couleur du cercle d'expérience
+                                      color:
+                                          backgroundColorSub, // Couleur du cercle d'expérience
                                     ),
                                     child: Container(
                                       padding: const EdgeInsets.all(4),

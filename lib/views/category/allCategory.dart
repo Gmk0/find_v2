@@ -27,44 +27,55 @@ class AllCategory extends GetView<CategoryController> {
         ],
       ),
       bottomSheet: const BottomNav(),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
+      body: NestedScrollView(
+        headerSliverBuilder: (context, innerBoxIsScrolled) {
+          return [
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Catégories',
+                      style:
+                          TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(height: 16),
+                    GridView.builder(
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 10.0,
+                        mainAxisSpacing: 10.0,
+                      ),
+                      shrinkWrap: true,
+                      itemCount: controller.category.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        final category = controller.category[index];
+                        return BuildCategoryCard(category: category);
+                      },
+                    ),
+                    const SizedBox(height: 20),
+                    const Text(
+                      'Détails des Catégories',
+                      style:
+                          TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 16),
+                  ],
+                ),
+              ),
+            ),
+          ];
+        },
+        body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                'Catégories',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: 16),
-              GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 10.0,
-                  mainAxisSpacing: 10.0,
-                ),
-                shrinkWrap: true,
-                itemCount: controller.category.length,
-                itemBuilder: (BuildContext context, int index) {
-                  final category = controller.category[index];
-                  return BuildCategoryCard(category: category);
-                },
-              ),
-              const SizedBox(height: 32),
-              const Text(
-                'Détails des Catégories',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 16),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: controller.category.map((category) {
-                  return _buildCategoryDetails(
-                      category.name, category.subcategories!);
-                }).toList(),
-              ),
-            ],
+            children: controller.category.map((category) {
+              return _buildCategoryDetails(
+                  category.name, category.subcategories!);
+            }).toList(),
           ),
         ),
       ),

@@ -1,3 +1,4 @@
+import 'package:find_v2/model/categoryMode.dart';
 import 'package:find_v2/model/freelanceModel.dart';
 
 class ServiceModel {
@@ -41,6 +42,8 @@ class ServiceModel {
   //late CategoryModel category;
   late String urlDefault;
 
+  late List<MediaModel>? media;
+
   ServiceModel(
       {required this.id,
       required this.title,
@@ -51,6 +54,7 @@ class ServiceModel {
       required this.categoryId,
       this.description,
       this.subCategory,
+      this.media,
       required this.freelance}
 
       // //this.image,
@@ -99,8 +103,12 @@ class ServiceModel {
         serviceNumero: json['service_numero'],
         categoryId: json['category_id'],
         description: json['description'],
-        subCategory: List<String>.from(['sub_category']),
-        freelance: FreelanceModel.fromJson(json['freelance'])
+        //subCategory: List<String>.from(['sub_category']),
+        freelance: FreelanceModel.fromJson(json['freelance']),
+        media: (json['media'] as List<dynamic>?)
+                ?.map((media) => MediaModel.fromJson(media))
+                .toList() ??
+            []
 
         ////json['image'],
         //files: List<String>.fro//m(json['files'] ?? [])

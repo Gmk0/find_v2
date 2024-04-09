@@ -1,7 +1,9 @@
+import 'package:find_v2/components/TextComponent.dart';
 import 'package:find_v2/components/appStyle.dart';
 import 'package:find_v2/components/reusableText.dart';
 import 'package:find_v2/components/serviceCard.dart';
 import 'package:find_v2/controller/ServiceController.dart';
+import 'package:find_v2/utils/theme2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,6 +14,10 @@ class ServicePopular extends StatelessWidget {
   final ServiceController controller = Get.put(ServiceController());
 
   Widget build(BuildContext context) {
+    final Brightness brightness = Theme.of(context).brightness;
+    final Color backgroundColor =
+        brightness == Brightness.dark ? Colors.grey[100]! : Colors.grey[900]!;
+
     return Obx(() {
       if (controller.serviceAll.isEmpty) {
         return const Center(
@@ -26,13 +32,10 @@ class ServicePopular extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  ReusableText(
+                  const TextComponent(
                     text: "Service Populaire",
-                    style: appStyle(
-                      20,
-                      Colors.grey.shade800,
-                      FontWeight.bold,
-                    ),
+                    size: 20,
+                    fw: FontWeight.bold,
                   ),
                   GestureDetector(
                     onTap: () {
@@ -55,11 +58,13 @@ class ServicePopular extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (((context, index) => Container(
                     margin: const EdgeInsets.symmetric(horizontal: 10.0),
-                    height: 100,
-                    width: 240,
+                    height: MediaQuery.of(context).size.height *
+                        0.2, // 20% de la hauteur de l'écran
+                    width: MediaQuery.of(context).size.width *
+                        0.6, // 60% de la largeur de l'écran
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: Colors.white,
+                      color: ThemeDarkBackground.getBackgroundColor(context),
                       boxShadow: const [
                         BoxShadow(
                           color: Colors.black12,

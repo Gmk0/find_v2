@@ -1,3 +1,7 @@
+import 'package:find_v2/components/TextComponent.dart';
+import 'package:find_v2/components/TextName.dart';
+import 'package:find_v2/components/UserNetworkImage.dart';
+import 'package:find_v2/components/netWorkImage.dart';
 import 'package:find_v2/model/freelanceModel.dart';
 import 'package:find_v2/views/freelance/oneFreelance.dart';
 import 'package:flutter/material.dart';
@@ -11,17 +15,26 @@ class FreelanceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Brightness brightness = Theme.of(context).brightness;
+    final Color backgroundColor =
+        brightness == Brightness.dark ? Colors.grey[900]! : Colors.white;
+    final Color backgroundColorSub =
+        brightness == Brightness.dark ? Colors.black : Colors.white;
+
+    final double height = MediaQuery.of(context).size.height;
+    final double width = MediaQuery.of(context).size.width;
     return GestureDetector(
       onTap: () {
-        Get.to(UserProfilePage(), transition: Transition.fadeIn);
+        Get.to(UserProfilePage(freelance: freelance),
+            transition: Transition.fadeIn);
       },
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 10.0),
-        height: 220,
-        width: 240,
+        height: height * 0.35,
+        width: width * 0.63,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: Colors.white,
+          color: backgroundColor,
           boxShadow: const [
             BoxShadow(
               color: Colors.black12,
@@ -37,18 +50,15 @@ class FreelanceCard extends StatelessWidget {
               alignment: Alignment.topRight,
               children: [
                 Container(
-                  height: 140.0,
-                  width: 240.0,
+                  height: height * 0.17,
+                  width: width * 0.63,
                   decoration: const BoxDecoration(
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(10),
                       topRight: Radius.circular(10),
                     ),
-                    image: DecorationImage(
-                      image: AssetImage('assets/images/ff3.png'),
-                      fit: BoxFit.cover,
-                    ),
                   ),
+                  child: UserNetworkImage(freelance.user.profilePhotoPath),
                 ),
                 IconButton(
                   onPressed: () {},
@@ -68,49 +78,46 @@ class FreelanceCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text(
-                        freelance.nomComplet,
-                        style: TextStyle(
-                            fontSize: 16, color: Colors.grey.shade800),
+                      TextComponent(
+                        text: freelance.nomComplet,
+                        size: 14,
                       ),
-                      Text(
-                        'Niveau ${freelance.level}',
-                        style: TextStyle(
-                            fontSize: 12.0, color: Colors.grey.shade800),
+                      TextComponent(
+                        text: 'Niveau ${freelance.level}',
+                        size: 12.0,
                       ),
                     ],
                   ),
                   const SizedBox(height: 5),
-                  Text(
-                    'Programmation & Tech',
-                    style:
-                        TextStyle(fontSize: 12.0, color: Colors.grey.shade800),
+                  TextComponent(
+                    text: freelance.categoryName,
+                    size: 12,
                   ),
-                  const SizedBox(height: 5),
+                  const SizedBox(height: 10),
                   Wrap(
                     children: [
-                      for (int i = 0; i < 3; i++)
-                        Container(
-                          margin: const EdgeInsets.all(2),
-
-                          //padding: EdgeInsets.all(value),
-                          decoration: BoxDecoration(
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(5)),
-                            // shape: BoxShape.circle,
-                            color: Colors.grey
-                                .shade200, // Couleur du cercle d'expérience
-                          ),
-                          child: Container(
-                            padding: const EdgeInsets.all(4),
-                            child: const Text(
-                              'Development web',
-                              style: TextStyle(
-                                fontSize: 12,
-                              ),
-                            ),
-                          ),
-                        ),
+                      ...freelance.subcategories?.take(2)?.map(
+                                (e) => Container(
+                                  margin: const EdgeInsets.all(2),
+                                  //padding: EdgeInsets.all(value),
+                                  decoration: BoxDecoration(
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(5)),
+                                    // shape: BoxShape.circle,
+                                    color:
+                                        backgroundColorSub, // Couleur du cercle d'expérience
+                                  ),
+                                  child: Container(
+                                    padding: const EdgeInsets.all(4),
+                                    child: TextName(
+                                      name: e.name,
+                                      taille: 22,
+                                      size: 12,
+                                    ),
+                                  ),
+                                ),
+                              ) ??
+                          []
                     ],
                   ),
                 ],

@@ -7,6 +7,9 @@ class Search extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Brightness brightness = Theme.of(context).brightness;
+    final Color backgroundColor =
+        brightness == Brightness.dark ? Colors.grey[900]! : Colors.white;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 30),
       child: Stack(
@@ -17,7 +20,7 @@ class Search extends StatelessWidget {
             },
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: backgroundColor,
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Row(

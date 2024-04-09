@@ -9,13 +9,13 @@ class BottomNav extends GetView<PageControllerView> {
   @override
   Widget build(BuildContext context) {
     return Obx(() => Container(
-          color: const Color(0xfff6f8ff),
+          //color: const Color(0xfff6f8ff),
           child: Container(
-            margin: const EdgeInsets.all(5),
+            //margin: const EdgeInsets.all(5),
             decoration: BoxDecoration(
               boxShadow: [
                 BoxShadow(
-                    color: Colors.grey.withOpacity(0.2),
+                    //color: Colors.grey.withOpacity(0.2),
                     spreadRadius: 5,
                     blurRadius: 10),
               ],
@@ -27,8 +27,8 @@ class BottomNav extends GetView<PageControllerView> {
                 onTap: (index) {
                   controller.setSelectedIndex(index);
                 },
-                selectedFontSize: 12,
-                unselectedFontSize: 12,
+                selectedFontSize: 11,
+                unselectedFontSize: 11,
                 unselectedItemColor: Colors.grey.withOpacity(0.7),
                 type: BottomNavigationBarType.fixed,
                 items: [

@@ -1,3 +1,4 @@
+import 'package:find_v2/binding/allntialBinding.dart';
 import 'package:find_v2/components/bottomNav.dart';
 import 'package:find_v2/controller/PageControllerView.dart';
 import 'package:find_v2/views/ChatUser/ChatPage.dart';
@@ -7,6 +8,7 @@ import 'package:find_v2/views/profile/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:connectivity_wrapper/connectivity_wrapper.dart';
 
 // ignore: must_be_immutable
 
@@ -23,6 +25,11 @@ class _HomeScreenState extends State<HomeScreen> {
   final PageControllerView pageController = Get.put(PageControllerView());
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     // Défaut à l'index 0 ou l'élément 'Home'
 
@@ -37,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
             //MessageUser(),
             SearchPageAll(),
             //OrderUser(),
-            ProfileUser(),
+            Profile(),
           ],
         ),
       ),

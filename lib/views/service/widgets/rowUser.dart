@@ -170,7 +170,7 @@ class RowUser extends StatelessWidget {
           Center(
             child: ElevatedButton(
               onPressed: () {
-                Get.to(UserProfilePage(), transition: Transition.fadeIn);
+                //Get.to(UserProfilePage(freelance: ,), transition: Transition.fadeIn);
               },
               child: Text('Voir le profil complet'),
             ),
