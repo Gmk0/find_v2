@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class ApiEndPoints {
   static const String baseUrl2 = "http://10.0.2.2:8000/api/";
   static const String baseUrl = "https://www.find-freelance.com/api/";
+  static const String authPusher = "$baseUrl/broadcasting/auth";
   static const String imageUrlDomaine =
       'http://10.0.2.2:8000/images/domaines2.png';
   static const String imageUrl = 'http://10.0.2.2:8000/images/domaines2.png';

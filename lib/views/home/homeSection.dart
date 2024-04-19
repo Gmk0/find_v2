@@ -4,6 +4,7 @@ import 'package:find_v2/views/home/widgets/categorySwipper.dart';
 import 'package:find_v2/views/home/widgets/freelancePopular.dart';
 import 'package:find_v2/views/home/widgets/servicePopular.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeSection extends StatelessWidget {
   const HomeSection({super.key});
@@ -29,7 +30,11 @@ class HomeSection extends StatelessWidget {
           ServicePopular(),
           FreelancePopular(),
           Container(
-            height: 200,
+            //height: 200.h,
+            constraints: BoxConstraints(
+              maxHeight: 220.h,
+              minHeight: 200.h,
+            ),
             margin: const EdgeInsets.only(top: 20, right: 10, left: 10),
             padding: EdgeInsets.symmetric(horizontal: 16.0),
             width: double.infinity,
@@ -46,10 +51,10 @@ class HomeSection extends StatelessWidget {
                   color: Colors.white, // Couleur de l'icône
                 ),
                 const SizedBox(height: 20), // Espace entre l'icône et le bouton
-                const Text(
+                Text(
                   "Besoin d'un service particulier ?", // Texte d'invitation
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 18.sp,
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                   ),
@@ -62,7 +67,7 @@ class HomeSection extends StatelessWidget {
                   child: Text(
                     "Créer une mission", // Texte du bouton
                     style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 16.sp,
                       color: skinFill,
                       fontWeight: FontWeight.bold,
                     ),

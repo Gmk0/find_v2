@@ -1,6 +1,5 @@
 import 'package:find_v2/controller/ServiceController.dart';
 import 'package:find_v2/utils/theme.dart';
-import 'package:find_v2/utils/theme2.dart';
 import 'package:find_v2/views/category/widgets/FilterScreen.dart';
 import 'package:find_v2/views/category/widgets/ServiceListeView.dart';
 import 'package:flutter/material.dart';

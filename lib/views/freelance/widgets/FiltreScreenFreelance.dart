@@ -1,13 +1,12 @@
-import 'package:find_v2/components/reusableText.dart';
+import 'package:find_v2/components/TextComponent.dart';
 import 'package:find_v2/controller/categoryController.dart';
 import 'package:find_v2/controller/filtreController.dart';
-import 'package:find_v2/model/categoryMode.dart';
 import 'package:find_v2/tools/classFiltre.dart';
 import 'package:find_v2/utils/theme.dart';
-import 'package:find_v2/utils/theme2.dart';
 import 'package:find_v2/views/category/widgets/rangeSliderView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
@@ -43,7 +42,6 @@ class _FilterScreenFreelanceState extends State<FilterScreenFreelance> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       body: Column(
         children: [
           getAppBarUI(context),
@@ -127,7 +125,7 @@ class _FilterScreenFreelanceState extends State<FilterScreenFreelance> {
   Widget getAppBarUI(context) {
     return Container(
       decoration: BoxDecoration(
-        color: FindTheme.buildLightTheme().colorScheme.background,
+        // color: FindTheme.buildLightTheme().colorScheme.background,
         boxShadow: <BoxShadow>[
           BoxShadow(
               color: Colors.grey.withOpacity(0.2),
@@ -157,13 +155,13 @@ class _FilterScreenFreelanceState extends State<FilterScreenFreelance> {
                 ),
               ),
             ),
-            const Expanded(
+            Expanded(
               child: Center(
                 child: Text(
                   'Filters',
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
-                    fontSize: 22,
+                    fontSize: 18.sp,
                   ),
                 ),
               ),
@@ -182,7 +180,10 @@ class _FilterScreenFreelanceState extends State<FilterScreenFreelance> {
                 },
                 child: const Padding(
                   padding: EdgeInsets.all(8.0),
-                  child: Text('Effacer filtre'),
+                  child: TextComponent(
+                    text: 'Effacer',
+                    size: 12,
+                  ),
                 ),
               ),
             )

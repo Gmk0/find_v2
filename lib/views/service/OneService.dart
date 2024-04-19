@@ -1,13 +1,10 @@
 import 'dart:developer';
 
 import 'package:find_v2/components/reusableText.dart';
-import 'package:find_v2/components/serviceCard.dart';
 import 'package:find_v2/controller/ServiceController.dart';
 import 'package:find_v2/model/serviceModel.dart';
 import 'package:find_v2/utils/assets.dart';
 import 'package:find_v2/utils/theme.dart';
-import 'package:find_v2/utils/theme2.dart';
-import 'package:find_v2/views/category/TestCategory.dart';
 import 'package:find_v2/views/service/widgets/headerService.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';

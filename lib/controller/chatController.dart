@@ -1,26 +1,59 @@
 import 'dart:convert';
-import 'package:find_v2/model/categoryMode.dart';
+import 'package:find_v2/controller/authController.dart';
+import 'package:find_v2/controller/pusherController.dart';
 import 'package:find_v2/model/conversationModel.dart';
 import 'package:find_v2/model/messageModel.dart';
 import 'package:find_v2/utils/apiEndPoints.dart';
+import 'package:find_v2/utils/service_pusher.dart';
+
 //import 'package:find_v2/utils/laravelEcho.text';
-import 'package:flutter/foundation.dart';
+
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:pusher_channels_flutter/pusher_channels_flutter.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ChatController extends GetxController {
   var conversations = <ConversationModel>[].obs;
-  //late LaravelEcho laravelEcho;
+
   late String currentUserReceiver; // Le récepteur actuel de l'utilisateur
-  late String auth_token; // Token d'authentification Laravel Ech
+
+  final PusherController pusherController = Get.find();
+  final PusherService _pusherService = PusherService();
+  var user = Get.find<AuthController>().user.value;
 
   @override
-  void onInit() {
+  Future<void> onInit() async {
     fetchConversation();
-    //auth_token = getAuthToken() as String;
-    //LaravelEcho.init(token: auth_token);
+
+    // _pusherService.initPusher();
+    // _pusherService.chatChannel(user.id);
+    // ever(pusherController.event, handleEvent);
+
     super.onInit();
+  }
+
+  void handleEvent(PusherEvent? event) {
+    // Votre logique pour traiter l'événement
+
+    Map<String, dynamic> data = jsonDecode(event?.data);
+    if (data.containsKey('message')) {
+      onMessageReceived(data);
+      //  Map<String, dynamic> message = data['message'];
+      //   String body = message['body'];
+      // print('Message : $body');
+    } else {
+      print('Pas de message dans cet événement');
+    }
+
+    // print('dans chat ${message}');
+  }
+
+  @override
+  void dispose() {
+    _pusherService.unsubscribe(user.id);
+    super.dispose();
   }
 
   Future<void> fetchConversation() async {
@@ -121,5 +154,28 @@ class ChatController extends GetxController {
   Future<String> getAuthToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString('token') ?? '';
+  }
+
+  void onMessageReceived(Map<String, dynamic> data) {
+    try {
+      var message = MessageModel.fromJson(data['message']);
+      var conversation = conversations.firstWhereOrNull(
+        (c) => c.id == message.conversationId,
+      );
+      // Si la conversation existe
+      if (conversation != null) {
+        // Ajouter le nouveau message à la liste des messages de la conversation
+        conversation.allMessages?.add(message);
+        conversation.lastMessage = message;
+        conversation.last_time_message = message.created_at;
+        // Mettre à jour la liste des conversations
+        conversations.refresh();
+      } else {
+        // Gérer le cas où la conversation n'existe pas
+        print('Conversation not found');
+      }
+    } catch (e) {
+      print('erreur de load message ${e.toString()}');
+    }
   }
 }

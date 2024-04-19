@@ -1,7 +1,9 @@
 import 'package:find_v2/components/netWorkImage.dart';
 import 'package:find_v2/components/swiper_pagination.dart';
 import 'package:find_v2/utils/assets.dart';
+import 'package:find_v2/views/auth/authView.dart';
 import 'package:find_v2/views/auth/login.dart';
+import 'package:find_v2/views/auth/started_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper_null_safety_flutter3/flutter_swiper_null_safety_flutter3.dart';
 import 'package:get/get.dart';
@@ -83,7 +85,7 @@ class _GetStartedState extends State<GetStarted> {
             child: const Text("Skip"),
             onPressed: () {
               Get.to(
-                const Login(),
+                const GetStartedView(),
                 transition: Transition.fadeIn,
               );
               //Navigator.of(context).pushReplacementNamed('');
@@ -101,7 +103,7 @@ class _GetStartedState extends State<GetStarted> {
                 _swiperController.next();
               } else {
                 Get.to(
-                  const Login(),
+                  const GetStartedView(),
                   transition: Transition.fadeIn,
                 );
               }

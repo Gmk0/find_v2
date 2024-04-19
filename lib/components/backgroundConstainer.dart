@@ -11,7 +11,7 @@ class BackgroundConstainer extends StatelessWidget {
   Widget build(BuildContext context) {
     final Brightness brightness = Theme.of(context).brightness;
     final Color backgroundColor =
-        brightness == Brightness.dark ? Colors.grey[900]! : Colors.white;
+        brightness == Brightness.dark ? Colors.grey[900]! : Colors.grey[100]!;
     return Container(
       width: width,
       height: heigth,

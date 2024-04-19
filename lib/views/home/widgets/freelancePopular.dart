@@ -5,6 +5,7 @@ import 'package:find_v2/components/reusableText.dart';
 import 'package:find_v2/controller/ServiceController.dart';
 import 'package:find_v2/views/freelance/allFreelance.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class FreelancePopular extends StatelessWidget {
@@ -30,7 +31,7 @@ class FreelancePopular extends StatelessWidget {
                 children: [
                   const TextComponent(
                     text: "Freelance Populaire",
-                    size: 18,
+                    size: 15,
                     fw: FontWeight.bold,
                   ),
                   GestureDetector(
@@ -41,7 +42,7 @@ class FreelancePopular extends StatelessWidget {
                     child: ReusableText(
                       text: "Voir Tout",
                       style: appStyle(
-                        16,
+                        14,
                         Colors.blue, // Couleur du texte "Voir Tout"
                         FontWeight.normal,
                       ),
@@ -51,7 +52,10 @@ class FreelancePopular extends StatelessWidget {
               ),
             ),
             Container(
-              height: MediaQuery.of(context).size.height * 0.35,
+              constraints: BoxConstraints(
+                maxHeight: 280.h,
+                minHeight: 260.h,
+              ),
               width: double.infinity,
               child: ListView.separated(
                 padding: const EdgeInsets.symmetric(horizontal: 10),

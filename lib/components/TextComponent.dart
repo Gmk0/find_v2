@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TextComponent extends StatelessWidget {
@@ -25,7 +26,7 @@ class TextComponent extends StatelessWidget {
       overflow: TextOverflow.fade,
       softWrap: false,
       style: GoogleFonts.poppins(
-        fontSize: size,
+        fontSize: size?.sp,
         color: color ?? backgroundColor,
         fontWeight: fw,
       ),

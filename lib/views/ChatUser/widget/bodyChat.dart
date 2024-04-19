@@ -8,10 +8,10 @@ import 'package:find_v2/model/messageModel.dart';
 import 'package:find_v2/model/userModel.dart';
 import 'package:find_v2/utils/assets.dart';
 import 'package:find_v2/utils/theme.dart';
-import 'package:find_v2/utils/theme2.dart';
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class BodyChat extends StatefulWidget {
@@ -26,16 +26,28 @@ class BodyChat extends StatefulWidget {
 }
 
 class _BodyChatState extends State<BodyChat> {
-  var user = Get.find<UserController>().userGet.value;
+  var user = Get.find<AuthController>().user.value;
 
   late ChatController chatController;
   final TextEditingController _messageController = TextEditingController();
+  ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
     chatController = Get.find<ChatController>();
-    print(user.id);
+
+    // Attendez que le widget soit construit
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      // Faites défiler vers le bas
+      // _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
+    });
+    Future.delayed(Duration.zero, () {
+      // Faites défiler vers le bas
+      if (_scrollController.hasClients) {
+        _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
+      }
+    });
   }
 
   void sendMessage() {
@@ -163,7 +175,7 @@ class _BodyChatState extends State<BodyChat> {
                   backgroundImage: AssetImage(appLogo),
                   maxRadius: 20,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 12,
                 ),
                 Expanded(
@@ -174,7 +186,7 @@ class _BodyChatState extends State<BodyChat> {
                       Text(
                         widget.receiver.name,
                         style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.w600),
+                            fontSize: 16.sp, fontWeight: FontWeight.w600),
                       ),
                       SizedBox(
                         height: 6,
@@ -202,7 +214,8 @@ class _BodyChatState extends State<BodyChat> {
             child: Padding(
               padding: const EdgeInsets.only(top: 8.0),
               child: ListView.builder(
-                reverse: false,
+                controller: _scrollController,
+                //  reverse: false,
                 itemCount: groupMessagesByDate(widget.messages!).length,
                 itemBuilder: (context, index) {
                   DateTime date = groupMessagesByDate(widget.messages!)
@@ -239,10 +252,13 @@ class _BodyChatState extends State<BodyChat> {
                   );
 
                   // Liste des widgets pour les messages de cette date
-                  List<Widget> messageWidgets = messagesForDate.map((message) {
+                  List<Widget> messageWidgets =
+                      messagesForDate.asMap().entries.map((entry) {
+                    int index = entry.key;
+                    MessageModel message = entry.value;
                     return Container(
                       margin: EdgeInsets.symmetric(vertical: 5),
-                      child: messageCompent(message),
+                      child: messageCompentTwo(messagesForDate, index),
                     );
                   }).toList();
 
@@ -334,6 +350,22 @@ class _BodyChatState extends State<BodyChat> {
           ? Color(0xFF1B97F3)
           : Color.fromARGB(255, 94, 94, 97),
       tail: true,
+      isSender: message.senderId == widget.conversation.user_id,
+      textStyle: TextStyle(color: Colors.white, fontSize: 16),
+    );
+  }
+
+  Widget messageCompentTwo(List<MessageModel> messages, int index) {
+    final MessageModel message = messages[index];
+    final bool isSameSenderAsNext = index < messages.length - 1 &&
+        message.senderId == messages[index + 1].senderId;
+
+    return BubbleSpecialThree(
+      text: message.body ?? '',
+      color: message.senderId == widget.conversation.user_id
+          ? Color(0xFF1B97F3)
+          : Color.fromARGB(255, 94, 94, 97),
+      tail: !isSameSenderAsNext,
       isSender: message.senderId == widget.conversation.user_id,
       textStyle: TextStyle(color: Colors.white, fontSize: 16),
     );

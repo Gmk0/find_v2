@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:find_v2/binding/allntialBinding.dart';
+import 'package:find_v2/controller/authController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -13,6 +14,7 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  AuthController authController = Get.find();
   @override
   void initState() {
     super.initState();
@@ -31,6 +33,8 @@ class _SplashScreenState extends State<SplashScreen> {
     String? _token = sp.getString('token') ?? null;
 
     if (_isLogin && _token != null) {
+      authController.fetchUser();
+
       loadEssential();
       Timer(const Duration(seconds: 3), () {
         Get.offAndToNamed(

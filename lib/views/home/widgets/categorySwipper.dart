@@ -6,16 +6,20 @@ import 'package:find_v2/controller/categoryController.dart';
 import 'package:find_v2/views/category/OneCategory.dart';
 import 'package:find_v2/views/category/allCategory.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class CategorySwipper extends StatelessWidget {
   CategorySwipper({Key? key}) : super(key: key);
 
-  final CategoryController controller = Get.put(CategoryController());
+  final CategoryController controller = Get.find();
   @override
   Widget build(BuildContext context) {
     String link =
         "https://cdn.pixabay.com/photo/2017/12/10/17/40/prague-3010407_960_720.jpg";
+
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     return Obx(
       () {
         if (controller.category.isEmpty) {
@@ -33,7 +37,7 @@ class CategorySwipper extends StatelessWidget {
                   children: [
                     const TextComponent(
                       text: "Catégories",
-                      size: 18,
+                      size: 15,
                       fw: FontWeight.bold,
                     ),
                     GestureDetector(
@@ -44,7 +48,7 @@ class CategorySwipper extends StatelessWidget {
                       child: ReusableText(
                         text: "Voir Tout",
                         style: appStyle(
-                          16,
+                          14,
                           Colors.blue, // Couleur du texte "Voir Tout"
                           FontWeight.normal,
                         ),
@@ -54,14 +58,16 @@ class CategorySwipper extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 230,
+                height: 250.h,
                 child: ListView.separated(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                   scrollDirection: Axis.horizontal,
                   itemBuilder: ((context, index) => GestureDetector(
-                        onTap: () => (Get.to(
-                            OneCategory(category: controller.category[index]))),
+                      onTap: () => (Get.to(
+                          OneCategory(category: controller.category[index]))),
+                      child: Container(
+                        margin: const EdgeInsets.symmetric(vertical: 2),
                         child: Column(
                           children: [
                             Padding(
@@ -73,8 +79,8 @@ class CategorySwipper extends StatelessWidget {
                                 child: Stack(
                                   children: <Widget>[
                                     SizedBox(
-                                      width: 160,
-                                      height: 180,
+                                      width: 180.w,
+                                      height: 180.h,
                                       child: PNetworkImage(
                                         controller.category[index].media
                                                 .isNotEmpty
@@ -87,8 +93,8 @@ class CategorySwipper extends StatelessWidget {
                                     Positioned(
                                       left: 0,
                                       bottom: 0,
-                                      width: 160,
-                                      height: 60,
+                                      width: 180.w,
+                                      height: 50.h,
                                       child: Container(
                                         decoration: const BoxDecoration(
                                             gradient: LinearGradient(
@@ -101,29 +107,15 @@ class CategorySwipper extends StatelessWidget {
                                       ),
                                     ),
                                     Positioned(
-                                      left: 10,
-                                      bottom: 10,
-                                      width: 145,
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: <Widget>[
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: <Widget>[
-                                              Text(
-                                                controller.category[index].name,
-                                                style: const TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 12,
-                                                    fontWeight: FontWeight.w700,
-                                                    letterSpacing: 1),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
+                                      left: 10.h,
+                                      bottom: 20.r,
+                                      child: Text(
+                                        controller.category[index].name,
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 12.sp,
+                                          fontWeight: FontWeight.w700,
+                                        ),
                                       ),
                                     )
                                   ],
@@ -132,7 +124,7 @@ class CategorySwipper extends StatelessWidget {
                             )
                           ],
                         ),
-                      )),
+                      ))),
                   separatorBuilder: ((context, index) => SizedBox(width: 35)),
                   itemCount: controller.category.length,
                 ),

@@ -1,12 +1,11 @@
 import 'package:find_v2/components/TextComponent.dart';
 import 'package:find_v2/components/bottomNav.dart';
-import 'package:find_v2/controller/UserController.dart';
-import 'package:find_v2/model/userModel.dart';
+import 'package:find_v2/controller/authController.dart';
 import 'package:find_v2/utils/assets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:find_v2/views/profile/widgets/_ProfileHeaderDelegate.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -18,7 +17,7 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   final String userPicture = 'path/to/user/picture.jpg';
 
-  var user = Get.find<UserController>().userGet.value;
+  var user = Get.find<AuthController>().user.value;
 
   @override
   void initState() {
@@ -32,7 +31,7 @@ class _ProfileState extends State<Profile> {
           Column(
             children: <Widget>[
               SizedBox(
-                height: MediaQuery.of(context).size.height * 0.25,
+                height: 200.h,
                 child: AppBar(
                   backgroundColor: Colors.blue, // Couleur de fond de l'AppBar
                   actions: <Widget>[
@@ -53,16 +52,19 @@ class _ProfileState extends State<Profile> {
             ],
           ),
           Positioned(
-            top: 100, // Ajustez cette valeur pour positionner le profil
+            top: 70.h, // Ajustez cette valeur pour positionner le profil
             left: 20.0,
             child: Row(
               children: <Widget>[
                 CircleAvatar(
                   backgroundImage: NetworkImage(images[0]),
-                  radius: 50.0,
+                  radius: 50.h,
                 ),
                 SizedBox(width: 10), // Espacement entre la photo et le nom
-                Text(user.name),
+                Text(
+                  user.name,
+                  style: TextStyle(fontSize: 15.sp),
+                ),
               ],
             ),
           ),

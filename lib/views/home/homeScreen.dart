@@ -4,6 +4,7 @@ import 'package:find_v2/controller/PageControllerView.dart';
 import 'package:find_v2/views/ChatUser/ChatPage.dart';
 import 'package:find_v2/views/home/HomePage.dart';
 import 'package:find_v2/views/home/searchPageAll.dart';
+import 'package:find_v2/views/order/liste_order.dart';
 import 'package:find_v2/views/profile/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -34,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
     // Défaut à l'index 0 ou l'élément 'Home'
 
     return Scaffold(
-      backgroundColor: Colors.grey.shade100,
+      backgroundColor: Colors.grey.shade200,
       body: Obx(
         () => IndexedStack(
           index: pageController.selectedIndex.value,
@@ -43,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ChatPage(),
             //MessageUser(),
             SearchPageAll(),
-            //OrderUser(),
+            ListeOrder(),
             Profile(),
           ],
         ),

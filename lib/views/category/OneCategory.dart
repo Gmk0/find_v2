@@ -3,12 +3,12 @@ import 'package:find_v2/controller/ServiceController.dart';
 import 'package:find_v2/controller/filtreController.dart';
 import 'package:find_v2/model/categoryMode.dart';
 import 'package:find_v2/utils/theme.dart';
-import 'package:find_v2/utils/theme2.dart';
 import 'package:find_v2/views/category/TestCategory.dart';
 import 'package:find_v2/views/category/widgets/FilterScreen.dart';
 import 'package:find_v2/views/category/widgets/ServiceListeView.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -143,7 +143,7 @@ class _OneCategoryState extends State<OneCategory>
 
   Widget getAppBarUI() {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         // color: FindTheme.buildLightTheme().colorScheme.background,
         boxShadow: <BoxShadow>[
           BoxShadow(
@@ -177,7 +177,7 @@ class _OneCategoryState extends State<OneCategory>
                     widget.category.name,
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
-                      fontSize: 18,
+                      fontSize: 15.sp,
                     ),
                   ),
                 ),

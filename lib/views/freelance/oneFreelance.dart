@@ -2,7 +2,6 @@ import 'package:find_v2/components/TextComponent.dart';
 import 'package:find_v2/model/freelanceModel.dart';
 import 'package:find_v2/utils/assets.dart';
 import 'package:find_v2/utils/theme.dart';
-import 'package:find_v2/utils/theme2.dart';
 import 'package:find_v2/views/service/widgets/ListeServiceUser.dart';
 import 'package:find_v2/views/service/widgets/OnePortFolio.dart';
 import 'package:flutter/material.dart';

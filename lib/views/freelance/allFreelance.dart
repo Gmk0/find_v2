@@ -1,12 +1,9 @@
 import 'package:find_v2/views/freelance/widgets/FiltreScreenFreelance.dart';
 import 'package:find_v2/views/freelance/widgets/ListeViewFreelance.dart';
 import 'package:flutter/material.dart';
-import 'package:find_v2/components/bottomNav.dart';
 import 'package:find_v2/controller/ServiceController.dart';
 import 'package:find_v2/controller/filtreController.dart';
-import 'package:find_v2/model/categoryMode.dart';
 import 'package:find_v2/utils/theme.dart';
-import 'package:find_v2/utils/theme2.dart';
 import 'package:find_v2/views/category/TestCategory.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

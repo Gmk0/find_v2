@@ -5,6 +5,7 @@ import 'package:find_v2/components/netWorkImage.dart';
 import 'package:find_v2/model/freelanceModel.dart';
 import 'package:find_v2/views/freelance/oneFreelance.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class FreelanceCard extends StatelessWidget {
@@ -30,8 +31,7 @@ class FreelanceCard extends StatelessWidget {
       },
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 10.0),
-        height: height * 0.35,
-        width: width * 0.63,
+        width: 250.w,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: backgroundColor,
@@ -50,9 +50,10 @@ class FreelanceCard extends StatelessWidget {
               alignment: Alignment.topRight,
               children: [
                 Container(
-                  height: height * 0.17,
-                  width: width * 0.63,
+                  height: 140.h,
+                  width: 250.w,
                   decoration: const BoxDecoration(
+                    color: Colors.white,
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(10),
                       topRight: Radius.circular(10),
@@ -78,12 +79,13 @@ class FreelanceCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      TextComponent(
-                        text: freelance.nomComplet,
+                      TextName(
+                        name: freelance.nomComplet,
                         size: 14,
+                        taille: 15,
                       ),
                       TextComponent(
-                        text: 'Niveau ${freelance.level}',
+                        text: 'Nv ${freelance.level}',
                         size: 12.0,
                       ),
                     ],

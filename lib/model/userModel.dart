@@ -33,8 +33,8 @@ class UserModel {
       //isOnline: json['is_online'],
       referralCode: json['referral_code'].toString(),
       emailVerifiedAt: json['email_verified_at'].toString(),
-      profilePhotoPath:
-          'https://www.find-freelance.com/images/logo/find_02.png',
+      profilePhotoPath: json['profile_url'].toString(),
+
       lastActivity: json['last_activity'].toString(),
     );
   }

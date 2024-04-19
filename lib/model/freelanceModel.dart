@@ -67,7 +67,7 @@ class FreelanceModel {
                 ?.map((langue) => Langue.fromJson(langue))
                 .toList() ??
             [],
-        subcategories: (json['subCategorie'] as List<dynamic>?)
+        subcategories: (json['subCategories'] as List<dynamic>?)
             ?.map((subCategory) => SubCategoryModel.fromJson(subCategory))
             .toList(),
         diplomes:

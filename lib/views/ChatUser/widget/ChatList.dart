@@ -14,7 +14,6 @@ class ChatList extends StatefulWidget {
 }
 
 class _ChatListState extends State<ChatList> {
-  @override
   late ChatController chatController;
 
   @override
@@ -108,8 +107,11 @@ class _ChatListState extends State<ChatList> {
                   ),
                 ],
                 child: ListTile(
-                  leading: const CircleAvatar(
-                    backgroundImage: AssetImage("assets/images/ff3.png"),
+                  leading: CircleAvatar(
+                    backgroundImage: NetworkImage(
+                      chatController
+                          .conversations[index].freelance.user.profilePhotoPath,
+                    ),
                   ),
                   title: Text(
                     chatController.conversations[index].freelance.nomComplet,
@@ -119,9 +121,29 @@ class _ChatListState extends State<ChatList> {
                     chatController.conversations[index].lastMessage?.body ?? '',
                     overflow: TextOverflow.ellipsis,
                   ),
-                  trailing: Text(
-                    formatDate(
-                        chatController.conversations[index].last_time_message),
+                  trailing: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        formatDate(chatController
+                            .conversations[index].last_time_message),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.all(5),
+                        width: 18,
+                        height: 18,
+                        decoration: const BoxDecoration(
+                          color: Colors.red,
+                          shape: BoxShape.circle,
+                        ),
+                        alignment: Alignment.center,
+                        child: Text(
+                          '${chatController.conversations[index].unreadCount}',
+                          style: const TextStyle(
+                              fontSize: 10, color: Colors.white),
+                        ),
+                      ),
+                    ],
                   ),
                   onTap: () {
                     Get.to(

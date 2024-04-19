@@ -3,6 +3,7 @@ import 'package:find_v2/model/categoryMode.dart';
 import 'package:find_v2/utils/assets.dart';
 import 'package:find_v2/views/category/OneCategory.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class BuildCategoryCard extends StatelessWidget {
@@ -27,8 +28,8 @@ class BuildCategoryCard extends StatelessWidget {
               child: Stack(
                 children: <Widget>[
                   SizedBox(
-                    width: 160,
-                    height: 160,
+                    width: 200.w,
+                    height: 120.w,
                     child: PNetworkImage(
                       category.media.isNotEmpty ? category.media[0].url : link,
                       fit: BoxFit.cover,
@@ -37,8 +38,8 @@ class BuildCategoryCard extends StatelessWidget {
                   Positioned(
                     left: 0,
                     bottom: 0,
-                    width: 150,
-                    height: 50,
+                    width: 180.w,
+                    height: 30.w,
                     child: Container(
                       decoration: const BoxDecoration(
                           gradient: LinearGradient(
@@ -48,29 +49,19 @@ class BuildCategoryCard extends StatelessWidget {
                     ),
                   ),
                   Positioned(
-                    left: 10,
-                    bottom: 10,
-                    width: 145,
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(
-                              category.name,
-                              style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w700,
-                                  letterSpacing: 1),
-                            ),
-                          ],
+                      left: 5,
+                      bottom: 10,
+                      width: 170.w,
+                      child: Expanded(
+                        child: Text(
+                          category.name,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.w700,
+                              letterSpacing: 1),
                         ),
-                      ],
-                    ),
-                  )
+                      ))
                 ],
               ),
             ),

@@ -16,6 +16,7 @@ class ConversationModel {
   late UserModel freelanceUser;
   late MessageModel? lastMessage;
   late List<MessageModel>? allMessages;
+  late int unreadCount;
 
   ConversationModel(
       {required this.freelance_id,
@@ -28,6 +29,7 @@ class ConversationModel {
       required this.created_at,
       required this.freelanceUser,
       required this.last_time_message,
+      required this.unreadCount,
       this.allMessages,
       this.lastMessage});
 
@@ -36,6 +38,7 @@ class ConversationModel {
     return ConversationModel(
         freelance_id: json['freelance_id'],
         user_id: json['user_id'],
+        unreadCount: json['messagesNonLue'],
         last_time_message: DateTime.parse(json['last_time_message']),
         status: json['status'],
         id: json['id'],

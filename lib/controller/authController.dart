@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:find_v2/binding/allntialBinding.dart';
 import 'package:find_v2/controller/UserController.dart';
+import 'package:find_v2/controller/pageControllerView.dart';
 import 'package:find_v2/model/userModel.dart';
 import 'package:find_v2/utils/apiEndPoints.dart';
 import 'package:find_v2/views/home/homeScreen.dart';
@@ -19,7 +20,6 @@ class AuthController extends GetxController {
   TextEditingController telephone = TextEditingController();
   TextEditingController parainage = TextEditingController();
   TextEditingController terms = TextEditingController();
-  final UserController userController = Get.put(UserController());
 
   var user = UserModel(
     id: '',
@@ -35,6 +35,12 @@ class AuthController extends GetxController {
   ).obs;
 
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+
+  @override
+  void onInit() {
+    //fetchUser();
+    super.onInit();
+  }
 
   Future<void> login() async {
     try {
@@ -61,14 +67,16 @@ class AuthController extends GetxController {
         await loadEssential();
         emailController.clear();
         passwordController.clear();
-        Get.off(const HomeScreen(), transition: Transition.fadeIn);
+        Get.offAll(const HomeScreen(), transition: Transition.fadeIn);
       } else {
         Map responseMap = jsonDecode(response.body);
 
         String errorMessage = responseMap['message'];
         Get.snackbar('Erreur', errorMessage,
+            colorText: Colors.white,
             snackPosition: SnackPosition.TOP,
-            duration: const Duration(seconds: 6));
+            backgroundColor: Colors.red,
+            duration: const Duration(seconds: 4));
       }
     } catch (e) {
       print(e.toString());
@@ -105,7 +113,7 @@ class AuthController extends GetxController {
         emailController.clear();
         passwordController.clear();
         await fillUserModel(userData);
-        await userController.fetchUser();
+        // await fetchUser();
 
         Get.off(const HomeScreen(), transition: Transition.fadeIn);
       } else if (response.statusCode == 422) {
@@ -152,6 +160,41 @@ class AuthController extends GetxController {
 
   Future<void> loadEssential() async {
     AllIntialBinding().dependencies();
-    await userController.fetchUser();
+  }
+
+  /// Fonction pour récupérer l'utilisateur connecté à partir du token
+  Future<void> fetchUser() async {
+    try {
+      var url = Uri.parse(
+          ApiEndPoints.baseUrl + ApiEndPoints.authEndPoints.fetchUser);
+      http.Response response =
+          await http.get(url, headers: await ApiEndPoints.getHeaders());
+
+      if (response.statusCode == 200) {
+        final responseData = jsonDecode(response.body);
+        user.value = UserModel.fromJson(responseData);
+      } else {
+        // Gérer l'erreur de récupération de l'utilisateur
+        print('Error fetching user: Status code ${response.statusCode}');
+
+        await clearUserData();
+
+        // Rediriger vers la page de connexion
+        Get.offAllNamed('/getStarted');
+      }
+    } catch (error) {
+      // Gérer l'erreur de réseau
+      print('Error fetching user: $error');
+    }
+  }
+
+  Future<void> clearUserData() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
+    Get.delete<PageControllerView>();
+
+    // Clear all stored data
+    // OR
+    // await prefs.remove('tokenKey'); // Remove specific token (replace 'tokenKey' with your actual key)
   }
 }

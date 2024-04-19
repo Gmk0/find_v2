@@ -11,15 +11,6 @@ class BottomNav extends GetView<PageControllerView> {
     return Obx(() => Container(
           //color: const Color(0xfff6f8ff),
           child: Container(
-            //margin: const EdgeInsets.all(5),
-            decoration: BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                    //color: Colors.grey.withOpacity(0.2),
-                    spreadRadius: 5,
-                    blurRadius: 10),
-              ],
-            ),
             child: ClipRRect(
               child: BottomNavigationBar(
                 selectedItemColor: skinFill,
@@ -33,7 +24,7 @@ class BottomNav extends GetView<PageControllerView> {
                 type: BottomNavigationBarType.fixed,
                 items: [
                   const BottomNavigationBarItem(
-                    label: 'home',
+                    label: 'Acceuil',
                     icon: Icon(
                       Icons.home_rounded,
                       size: 25,

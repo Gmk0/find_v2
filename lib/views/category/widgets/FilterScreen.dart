@@ -3,13 +3,13 @@ import 'package:find_v2/controller/filtreController.dart';
 import 'package:find_v2/model/categoryMode.dart';
 import 'package:find_v2/tools/classFiltre.dart';
 import 'package:find_v2/utils/theme.dart';
-import 'package:find_v2/utils/theme2.dart';
 import 'package:find_v2/views/category/widgets/rangeSliderView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 
@@ -44,7 +44,7 @@ class _FilterScreenState extends State<FilterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      //backgroundColor: Colors.white,
       body: Column(
         children: [
           getAppBarUI(context),
@@ -127,12 +127,15 @@ class _FilterScreenState extends State<FilterScreen> {
   }
 
   Widget getAppBarUI(context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Container(
       decoration: BoxDecoration(
-        color: FindTheme.buildLightTheme().colorScheme.background,
+        // color: FindTheme.buildLightTheme().colorScheme.background,
         boxShadow: <BoxShadow>[
           BoxShadow(
-              color: Colors.grey.withOpacity(0.2),
+              color: isDark
+                  ? const Color.fromARGB(26, 158, 158, 158).withOpacity(0.2)
+                  : Colors.grey.withOpacity(0.2),
               offset: const Offset(0, 2),
               blurRadius: 4.0),
         ],
@@ -159,13 +162,13 @@ class _FilterScreenState extends State<FilterScreen> {
                 ),
               ),
             ),
-            const Expanded(
+            Expanded(
               child: Center(
                 child: Text(
                   'Filters',
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
-                    fontSize: 22,
+                    fontSize: 22.sp,
                   ),
                 ),
               ),

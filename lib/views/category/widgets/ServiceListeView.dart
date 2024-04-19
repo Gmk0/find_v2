@@ -65,17 +65,19 @@ class ServiceListView extends StatelessWidget {
                         color: backgroundColor,
                         borderRadius: BorderRadius.all(Radius.circular(16))),
                     margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                    child: Row(
+                    child: IntrinsicHeight(
+                        child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
                       children: [
                         Stack(alignment: Alignment.topLeft, children: [
                           Container(
-                            height: 150.0,
-                            width: 140.0,
+                            //margin: EdgeInsets.all(5),
+                            height: 150.h,
+                            width: 120.h,
                             decoration: const BoxDecoration(
-                              color: Colors.transparent,
+                              color: Colors.white,
                               borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(10),
                                 topRight: Radius.circular(10),
@@ -85,7 +87,7 @@ class ServiceListView extends StatelessWidget {
                               service.media != null && service.media!.isNotEmpty
                                   ? service.media![0].url
                                   : images[0],
-                              fit: BoxFit.cover,
+                              fit: BoxFit.fill,
                             ),
                           ),
                         ]),
@@ -93,8 +95,6 @@ class ServiceListView extends StatelessWidget {
                           child: Container(
                             padding: EdgeInsets.symmetric(
                                 horizontal: 10, vertical: 5),
-                            constraints: const BoxConstraints(
-                                minHeight: 100, maxHeight: 150),
                             color: Colors.transparent,
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
@@ -104,16 +104,16 @@ class ServiceListView extends StatelessWidget {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    const Row(
+                                    Row(
                                       children: [
                                         Icon(
                                           Icons.star,
                                           color: Colors.yellow,
-                                          size: 16.0,
+                                          size: 16.sp,
                                         ),
                                         ReusableText(
                                           text: "(4)",
-                                          style: TextStyle(fontSize: 16),
+                                          style: TextStyle(fontSize: 16.sp),
                                         ),
                                       ],
                                     ),
@@ -135,8 +135,8 @@ class ServiceListView extends StatelessWidget {
                                   child: GestureDetector(
                                     child: Text(
                                       service.title,
-                                      style: const TextStyle(
-                                        fontSize: 15,
+                                      style: TextStyle(
+                                        fontSize: 14.sp,
                                       ),
                                     ),
                                   ),
@@ -163,7 +163,7 @@ class ServiceListView extends StatelessWidget {
                                             Text(
                                               service.basicPrice,
                                               style: TextStyle(
-                                                  fontSize: 16,
+                                                  fontSize: 16.sp,
                                                   color: skinFill,
                                                   fontWeight: FontWeight.bold),
                                             ),
@@ -177,7 +177,7 @@ class ServiceListView extends StatelessWidget {
                         ),
                       ],
                       // Ajouter d'autres détails du service si nécessaire
-                    ),
+                    )),
                   ),
                 ),
               ),

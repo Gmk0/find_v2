@@ -14,72 +14,72 @@ class AllCategory extends GetView<CategoryController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Catégories'),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Get.to(() => const SearchPageAll(),
-                  transition: Transition.downToUp);
-            },
-            icon: Icon(Icons.search),
-          )
-        ],
-      ),
-      bottomSheet: const BottomNav(),
-      body: NestedScrollView(
-        headerSliverBuilder: (context, innerBoxIsScrolled) {
-          return [
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'Catégories',
-                      style:
-                          TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(height: 16),
-                    GridView.builder(
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 10.0,
-                        mainAxisSpacing: 10.0,
-                      ),
-                      shrinkWrap: true,
-                      itemCount: controller.category.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        final category = controller.category[index];
-                        return BuildCategoryCard(category: category);
-                      },
-                    ),
-                    const SizedBox(height: 20),
-                    const Text(
-                      'Détails des Catégories',
-                      style:
-                          TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(height: 16),
-                  ],
-                ),
-              ),
-            ),
-          ];
-        },
-        body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: controller.category.map((category) {
-              return _buildCategoryDetails(
-                  category.name, category.subcategories!);
-            }).toList(),
-          ),
+        appBar: AppBar(
+          title: const Text('Catégories'),
+          actions: [
+            IconButton(
+              onPressed: () {
+                Get.to(() => const SearchPageAll(),
+                    transition: Transition.downToUp);
+              },
+              icon: const Icon(Icons.search),
+            )
+          ],
         ),
-      ),
-    );
+        bottomNavigationBar: const BottomNav(),
+        body: SingleChildScrollView(
+          child: Container(
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Catégories',
+                        style: TextStyle(
+                            fontSize: 24, fontWeight: FontWeight.bold),
+                      ),
+                      // ignore: prefer_const_constructors
+                      SizedBox(height: 16),
+
+                      GridView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          //crossAxisSpacing: 5.0,
+                          //mainAxisSpacing: 8.0,
+                        ),
+                        shrinkWrap: true,
+                        itemCount: controller.category.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          final category = controller.category[index];
+                          return BuildCategoryCard(category: category);
+                        },
+                      ),
+                      const SizedBox(height: 20),
+                      const Text(
+                        'Détails des Catégories',
+                        style: TextStyle(
+                            fontSize: 24, fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(height: 16),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: controller.category.map((category) {
+                          return _buildCategoryDetails(
+                              category.name, category.subcategories!);
+                        }).toList(),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ));
   }
 
   Widget _buildCategoryDetails(

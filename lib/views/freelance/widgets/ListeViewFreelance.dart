@@ -1,16 +1,18 @@
 import 'package:find_v2/components/FreelanceCard.dart';
 import 'package:find_v2/components/TextComponent.dart';
+import 'package:find_v2/components/TextName.dart';
+import 'package:find_v2/components/UserNetworkImage.dart';
 import 'package:find_v2/components/reusableText.dart';
 import 'package:find_v2/model/freelanceModel.dart';
 import 'package:find_v2/model/serviceModel.dart';
 import 'package:find_v2/utils/assets.dart';
 import 'package:find_v2/utils/theme.dart';
-import 'package:find_v2/utils/theme2.dart';
 import 'package:find_v2/views/freelance/oneFreelance.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 
@@ -75,14 +77,14 @@ class FreelanceListView extends StatelessWidget {
                         children: [
                           Container(
                             margin: EdgeInsets.all(10),
-                            height: height * 0.2,
-                            width: width * 0.4,
-                            child: CircleAvatar(
-                              radius: 50,
-                              backgroundImage: const AssetImage(
-                                'assets/images/ff3.png',
-                              ),
-                            ),
+                            height: height * 0.20,
+                            width: width * 0.7,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(15))),
+                            child: UserNetworkImage(
+                                freelance.user.profilePhotoPath),
                           ),
                           IconButton(
                             onPressed: () {},
@@ -105,44 +107,45 @@ class FreelanceListView extends StatelessWidget {
                               children: [
                                 TextComponent(
                                   text: freelance.nomComplet,
-                                  size: 16,
+                                  size: 16.sp,
                                 ),
                                 TextComponent(
                                   text: 'Niveau ${freelance.level}',
-                                  size: 12,
+                                  size: 12.sp,
                                 ),
                               ],
                             ),
                             const SizedBox(height: 10),
                             TextComponent(
-                              text: 'Programmation & Tech',
-                              size: 12,
+                              text: freelance.categoryName,
+                              size: 12.sp,
                             ),
                             const SizedBox(height: 10),
                             Wrap(
                               children: [
-                                for (int i = 0; i < 3; i++)
-                                  Container(
-                                    margin: const EdgeInsets.all(2),
-
-                                    //padding: EdgeInsets.all(value),
-                                    decoration: BoxDecoration(
-                                      borderRadius: const BorderRadius.all(
-                                          Radius.circular(5)),
-                                      // shape: BoxShape.circle,
-                                      color:
-                                          backgroundColorSub, // Couleur du cercle d'expérience
-                                    ),
-                                    child: Container(
-                                      padding: const EdgeInsets.all(4),
-                                      child: const Text(
-                                        'Development web',
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
+                                ...freelance.subcategories?.take(2)?.map(
+                                          (e) => Container(
+                                            margin: const EdgeInsets.all(2),
+                                            //padding: EdgeInsets.all(value),
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  const BorderRadius.all(
+                                                      Radius.circular(5)),
+                                              // shape: BoxShape.circle,
+                                              color:
+                                                  backgroundColorSub, // Couleur du cercle d'expérience
+                                            ),
+                                            child: Container(
+                                              padding: const EdgeInsets.all(4),
+                                              child: TextName(
+                                                name: e.name,
+                                                taille: 30,
+                                                size: 12.sp,
+                                              ),
+                                            ),
+                                          ),
+                                        ) ??
+                                    []
                               ],
                             ),
                           ],

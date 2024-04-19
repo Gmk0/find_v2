@@ -1,12 +1,13 @@
+import 'package:find_v2/components/TextComponent.dart';
 import 'package:find_v2/components/TextName.dart';
 import 'package:find_v2/components/netWorkImage.dart';
 import 'package:find_v2/model/serviceModel.dart';
 import 'package:find_v2/utils/assets.dart';
 import 'package:find_v2/utils/theme.dart';
-import 'package:find_v2/utils/theme2.dart';
 import 'package:find_v2/views/service/OneService.dart';
 import 'package:find_v2/views/service/OneServiceView.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class ServiceCard extends StatelessWidget {
@@ -22,8 +23,14 @@ class ServiceCard extends StatelessWidget {
       children: [
         Stack(alignment: Alignment.topRight, children: [
           Container(
-              height: MediaQuery.of(context).size.height * 0.16,
-              //width: 190.0,
+              constraints: BoxConstraints(
+                maxHeight: 140.h,
+                minHeight: 130.h,
+                maxWidth: 220.w,
+                minWidth: 220.w,
+              ),
+              height: 130.h,
+              width: 220.w,
               decoration: BoxDecoration(
                 color: ThemeDarkBackground.getBackgroundColor(context),
                 borderRadius: const BorderRadius.only(
@@ -69,13 +76,13 @@ class ServiceCard extends StatelessWidget {
                           children: [
                             TextName(
                               name: service.freelance.user.name,
-                              size: 12,
+                              size: 12.sp,
                               taille: 14, // Ajoutez le nom de l'utilisateur ici
                             ),
                             Text(
                               'Niveau ${service.freelance.level}', // Ajoutez le nom de l'utilisateur ici
-                              style:
-                                  TextStyle(fontSize: 11.0, color: Colors.grey),
+                              style: TextStyle(
+                                  fontSize: 12.sp, color: Colors.grey),
                             ),
                           ],
                         )
@@ -93,38 +100,40 @@ class ServiceCard extends StatelessWidget {
                       },
                       child: Text(
                         service.title,
-                        style: const TextStyle(
-                          fontSize: 13,
+                        style: TextStyle(
+                          fontSize: 13.sp,
                         ),
                       ),
                     )),
                 const SizedBox(width: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const SizedBox(
-                      width: 20,
-                    ),
-                    GestureDetector(
-                        onTap: () {
-                          Get.to(OneService(service: service));
-                        },
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            const Text('a partir de '),
-                            const SizedBox(width: 5),
-                            Text(
-                              service.basicPrice,
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  color: skinFill,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            const SizedBox(width: 2),
-                          ],
-                        ))
-                  ],
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      GestureDetector(
+                          onTap: () {
+                            Get.to(OneService(service: service));
+                          },
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              TextComponent(text: 'a partir de', size: 13),
+                              const SizedBox(width: 5),
+                              Text(
+                                '${service.basicPrice} \$',
+                                style: TextStyle(
+                                    fontSize: 17.sp,
+                                    color: skinFill,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              const SizedBox(width: 2),
+                            ],
+                          ))
+                    ],
+                  ),
                 )
               ],
             ),

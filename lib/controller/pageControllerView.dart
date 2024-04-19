@@ -1,8 +1,10 @@
 import 'package:find_v2/binding/allntialBinding.dart';
 import 'package:find_v2/views/ChatUser/ChatPage.dart';
+import 'package:find_v2/views/Test.dart';
 import 'package:find_v2/views/home/HomePage.dart';
 import 'package:find_v2/views/home/searchPageAll.dart';
 import 'package:find_v2/views/home/widgets/HomeSearch.dart';
+import 'package:find_v2/views/order/liste_order.dart';
 import 'package:find_v2/views/profile/profile.dart';
 import 'package:get/get.dart';
 
@@ -17,7 +19,7 @@ class PageControllerView extends GetxController {
   void _navigateToPage(int index) {
     switch (index) {
       case 0:
-        Get.to(HomePage(), transition: Transition.fade);
+        Get.to(() => HomePage(), transition: Transition.fade);
         break;
       case 1:
         Get.to(() => ChatPage(), transition: Transition.fadeIn);
@@ -26,10 +28,10 @@ class PageControllerView extends GetxController {
         Get.to(() => HomeSearch(), transition: Transition.fadeIn);
         break;
       case 3:
-        Get.to(SearchPageAll(), transition: Transition.fade);
+        Get.to(() => ListeOrder(), transition: Transition.fade);
         break;
       case 4:
-        Get.offAll(Profile(), transition: Transition.fade);
+        Get.to(() => Profile(), transition: Transition.fade);
         break;
       // Ajoutez d'autres cas pour d'autres pages si nécessaire
     }
