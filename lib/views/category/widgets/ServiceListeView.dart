@@ -1,17 +1,12 @@
+import 'package:find_v2/components/TextComponent.dart';
 import 'package:find_v2/components/netWorkImage.dart';
-import 'package:find_v2/components/reusableText.dart';
 import 'package:find_v2/model/serviceModel.dart';
 import 'package:find_v2/utils/assets.dart';
 import 'package:find_v2/utils/theme.dart';
-import 'package:find_v2/utils/theme2.dart';
 import 'package:find_v2/views/service/OneService.dart';
-import 'package:find_v2/views/service/OneService2.dart';
 import 'package:find_v2/views/service/OneServiceView.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 class ServiceListView extends StatelessWidget {

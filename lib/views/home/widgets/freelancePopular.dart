@@ -1,17 +1,15 @@
 import 'package:find_v2/components/FreelanceCard.dart';
 import 'package:find_v2/components/TextComponent.dart';
-import 'package:find_v2/components/appStyle.dart';
-import 'package:find_v2/components/reusableText.dart';
 import 'package:find_v2/controller/ServiceController.dart';
+import 'package:find_v2/controller/categoryController.dart';
 import 'package:find_v2/views/freelance/allFreelance.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class FreelancePopular extends StatelessWidget {
+// ignore: must_be_immutable
+class FreelancePopular extends GetView<CategoryController> {
   FreelancePopular({Key? key}) : super(key: key);
-
-  ServiceController controller = Get.find<ServiceController>();
 
   @override
   Widget build(BuildContext context) {

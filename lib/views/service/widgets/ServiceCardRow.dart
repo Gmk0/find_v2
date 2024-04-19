@@ -1,4 +1,4 @@
-import 'package:find_v2/components/reusableText.dart';
+import 'package:find_v2/components/TextComponent.dart';
 import 'package:find_v2/model/serviceModel.dart';
 import 'package:find_v2/utils/assets.dart';
 import 'package:find_v2/utils/theme.dart';
@@ -75,9 +75,9 @@ class ServiceCardRow extends StatelessWidget {
                                   color: Colors.yellow,
                                   size: 16.0,
                                 ),
-                                ReusableText(
+                                TextComponent(
                                   text: "(4)",
-                                  style: TextStyle(fontSize: 16),
+                                  size: 16,
                                 ),
                               ],
                             ),

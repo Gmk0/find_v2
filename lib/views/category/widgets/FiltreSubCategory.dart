@@ -6,7 +6,6 @@ import 'package:find_v2/views/category/widgets/rangeSliderView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:multi_select_flutter/multi_select_flutter.dart';
 
 class FiltreSubCategory extends StatefulWidget {
   const FiltreSubCategory({super.key, required this.categoryModel});
@@ -427,7 +426,7 @@ class _FiltreSubCategoryState extends State<FiltreSubCategory> {
 
   List<Widget> getPListLocalisation() {
     final List<Widget> noList = <Widget>[];
-    int count = 0;
+
     const int columnCount = 2;
     final List<LocalisationFreelance> data =
         filterController.localisationFreelanceData.take(5).toList();

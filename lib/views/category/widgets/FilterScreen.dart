@@ -1,4 +1,3 @@
-import 'package:find_v2/components/reusableText.dart';
 import 'package:find_v2/controller/filtreController.dart';
 import 'package:find_v2/model/categoryMode.dart';
 import 'package:find_v2/tools/classFiltre.dart';
@@ -6,9 +5,6 @@ import 'package:find_v2/utils/theme.dart';
 import 'package:find_v2/views/category/widgets/rangeSliderView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
@@ -482,7 +478,7 @@ class _FilterScreenState extends State<FilterScreen> {
 
   List<Widget> getPListLocalisation() {
     final List<Widget> noList = <Widget>[];
-    int count = 0;
+
     const int columnCount = 2;
     final List<LocalisationFreelance> data =
         filterController.localisationFreelanceData.take(5).toList();

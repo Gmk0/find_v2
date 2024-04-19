@@ -1,5 +1,5 @@
 import 'package:find_v2/components/CustomButton.dart';
-import 'package:find_v2/components/reusableText.dart';
+import 'package:find_v2/components/TextComponent.dart';
 import 'package:find_v2/controller/ServiceController.dart';
 import 'package:find_v2/model/serviceModel.dart';
 import 'package:find_v2/utils/assets.dart';
@@ -356,9 +356,9 @@ class _oneServiceViewState extends State<oneServiceView> {
                                                 size: 16,
                                                 color: Colors.yellow,
                                               ),
-                                              ReusableText(
+                                              TextComponent(
                                                 text: "(4)",
-                                                style: TextStyle(fontSize: 14),
+                                                size: 14,
                                               ),
                                             ],
                                           ),

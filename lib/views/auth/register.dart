@@ -1,8 +1,7 @@
-import 'package:find_v2/components/CustomTextFormField.dart';
+import 'package:find_v2/components/auth_widget.dart';
 import 'package:find_v2/components/raisedeButton.dart';
 import 'package:find_v2/controller/authController.dart';
 import 'package:find_v2/utils/authValidators.dart';
-import 'package:find_v2/views/auth/login.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -204,9 +203,7 @@ class _RegisterState extends State<Register> {
               ),
               const SizedBox(height: 20),
               GestureDetector(
-                onTap: () {
-                  Get.to(const Login(), transition: Transition.fadeIn);
-                },
+                onTap: () {},
                 child: Text("Vous avez deja un compte? connectez-vous",
                     style: TextStyle(
                         decoration: TextDecoration.underline,

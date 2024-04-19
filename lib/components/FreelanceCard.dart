@@ -1,5 +1,4 @@
 import 'package:find_v2/components/TextComponent.dart';
-import 'package:find_v2/components/TextName.dart';
 import 'package:find_v2/components/UserNetworkImage.dart';
 import 'package:find_v2/components/netWorkImage.dart';
 import 'package:find_v2/model/freelanceModel.dart';

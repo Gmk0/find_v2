@@ -1,7 +1,7 @@
 import 'package:find_v2/utils/assets.dart';
 import 'package:find_v2/views/freelance/oneFreelance.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+
 import 'package:readmore/readmore.dart';
 import 'package:bottom_sheet/bottom_sheet.dart';
 

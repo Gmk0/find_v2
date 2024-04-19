@@ -1,17 +1,16 @@
 import 'package:find_v2/components/TextComponent.dart';
-import 'package:find_v2/components/appStyle.dart';
-import 'package:find_v2/components/reusableText.dart';
 import 'package:find_v2/components/serviceCard.dart';
 import 'package:find_v2/controller/ServiceController.dart';
+import 'package:find_v2/controller/categoryController.dart';
 import 'package:find_v2/utils/theme2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class ServicePopular extends StatelessWidget {
+class ServicePopular extends GetView<CategoryController> {
   ServicePopular({Key? key}) : super(key: key);
 
-  final ServiceController controller = Get.find<ServiceController>();
+  //final ServiceController controller = Get.find<ServiceController>();
 
   @override
   Widget build(BuildContext context) {

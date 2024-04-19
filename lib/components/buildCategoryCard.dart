@@ -1,18 +1,16 @@
 import 'package:find_v2/components/netWorkImage.dart';
 import 'package:find_v2/model/categoryMode.dart';
-import 'package:find_v2/utils/assets.dart';
 import 'package:find_v2/views/category/OneCategory.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+// ignore: must_be_immutable
 class BuildCategoryCard extends StatelessWidget {
   BuildCategoryCard({super.key, required this.category});
   final CategoryModel category;
 
   @override
-  String link =
-      "https://cdn.pixabay.com/photo/2017/12/10/17/40/prague-3010407_960_720.jpg";
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
@@ -31,7 +29,7 @@ class BuildCategoryCard extends StatelessWidget {
                     width: 200.w,
                     height: 120.w,
                     child: PNetworkImage(
-                      category.media.isNotEmpty ? category.media[0].url : link,
+                      category.media[0].url,
                       fit: BoxFit.cover,
                     ),
                   ),

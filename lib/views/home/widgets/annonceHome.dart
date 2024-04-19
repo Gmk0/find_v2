@@ -10,8 +10,9 @@ class Annonce {
   Annonce(this.texte, this.icon);
 }
 
+// ignore: must_be_immutable
 class AnnonceHome extends StatelessWidget {
-  AnnonceHome({Key? key}) : super(key: key);
+  AnnonceHome({super.key});
 
   List<Annonce> annonces = [
     Annonce("Transformez vos passions en profits.", FontAwesomeIcons.moneyBill),
@@ -22,7 +23,7 @@ class AnnonceHome extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: Card(
           child: Container(
             height: 150,

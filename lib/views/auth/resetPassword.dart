@@ -1,4 +1,4 @@
-import 'package:find_v2/components/CustomTextFormField.dart';
+import 'package:find_v2/components/auth_widget.dart';
 import 'package:find_v2/components/raisedeButton.dart';
 import 'package:find_v2/controller/authController.dart';
 import 'package:find_v2/utils/authValidators.dart';

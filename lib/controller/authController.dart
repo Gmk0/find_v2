@@ -197,4 +197,31 @@ class AuthController extends GetxController {
     // OR
     // await prefs.remove('tokenKey'); // Remove specific token (replace 'tokenKey' with your actual key)
   }
+
+  void logout() async {
+    try {
+      var url =
+          Uri.parse(ApiEndPoints.baseUrl + ApiEndPoints.authEndPoints.logout);
+      http.Response response =
+          await http.get(url, headers: await ApiEndPoints.getHeaders());
+
+      if (response.statusCode == 200) {
+        //_user = Rxn<UserModel>();
+
+        await clearUserData();
+
+        // Rediriger vers la page de connexion
+        Get.offAllNamed('/getStarted');
+      } else {
+        // Gérer l'erreur de déconnexion
+        print('Error logging out: Status code ${response.statusCode}');
+      }
+    } catch (error) {
+      // Gérer l'erreur de réseau
+      Get.snackbar('Erreur', error.toString(),
+          snackPosition: SnackPosition.TOP,
+          duration: const Duration(seconds: 6));
+      print('Error logging out: $error');
+    }
+  }
 }

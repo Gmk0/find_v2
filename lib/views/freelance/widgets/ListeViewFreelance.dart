@@ -1,17 +1,10 @@
-import 'package:find_v2/components/FreelanceCard.dart';
 import 'package:find_v2/components/TextComponent.dart';
-import 'package:find_v2/components/TextName.dart';
 import 'package:find_v2/components/UserNetworkImage.dart';
-import 'package:find_v2/components/reusableText.dart';
 import 'package:find_v2/model/freelanceModel.dart';
-import 'package:find_v2/model/serviceModel.dart';
-import 'package:find_v2/utils/assets.dart';
 import 'package:find_v2/utils/theme.dart';
 import 'package:find_v2/views/freelance/oneFreelance.dart';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';

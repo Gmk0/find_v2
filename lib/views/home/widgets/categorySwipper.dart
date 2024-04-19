@@ -1,7 +1,5 @@
 import 'package:find_v2/components/TextComponent.dart';
-import 'package:find_v2/components/appStyle.dart';
 import 'package:find_v2/components/netWorkImage.dart';
-import 'package:find_v2/components/reusableText.dart';
 import 'package:find_v2/controller/categoryController.dart';
 import 'package:find_v2/views/category/OneCategory.dart';
 import 'package:find_v2/views/category/allCategory.dart';
@@ -10,7 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class CategorySwipper extends StatelessWidget {
-  CategorySwipper({Key? key}) : super(key: key);
+  CategorySwipper({super.key});
 
   final CategoryController controller = Get.find();
   @override
@@ -18,8 +16,6 @@ class CategorySwipper extends StatelessWidget {
     String link =
         "https://cdn.pixabay.com/photo/2017/12/10/17/40/prague-3010407_960_720.jpg";
 
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
     return Obx(
       () {
         if (controller.category.isEmpty) {

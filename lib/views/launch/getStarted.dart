@@ -1,8 +1,6 @@
 import 'package:find_v2/components/netWorkImage.dart';
 import 'package:find_v2/components/swiper_pagination.dart';
 import 'package:find_v2/utils/assets.dart';
-import 'package:find_v2/views/auth/authView.dart';
-import 'package:find_v2/views/auth/login.dart';
 import 'package:find_v2/views/auth/started_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper_null_safety_flutter3/flutter_swiper_null_safety_flutter3.dart';

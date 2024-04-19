@@ -12,9 +12,10 @@ class AllIntialBinding implements Bindings {
   @override
   void dependencies() {
     Get.put<PusherController>(PusherController());
-    Get.lazyPut<CategoryController>(() => CategoryController());
-    Get.lazyPut<ServiceController>(() => ServiceController());
+
+    //Get.lazyPut<ServiceController>(() => ServiceController());
     Get.put<AuthController>(AuthController());
+    Get.lazyPut<CategoryController>(() => CategoryController());
     Get.put<PageControllerView>(PageControllerView());
     Get.lazyPut<ChatController>(() => ChatController());
     // Get.put<PusherController>(PusherController());

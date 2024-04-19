@@ -2,6 +2,7 @@ import 'package:find_v2/components/TextComponent.dart';
 import 'package:find_v2/components/bottomNav.dart';
 import 'package:find_v2/controller/authController.dart';
 import 'package:find_v2/utils/assets.dart';
+import 'package:find_v2/views/profile/compte_setting.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -132,7 +133,9 @@ class _ProfileState extends State<Profile> {
               padding: EdgeInsets.only(left: width * 0.14),
               child: Divider(height: 5),
             ),
-            buildSectionGroup('Compte', Icons.account_circle, () {}),
+            buildSectionGroup('Compte', Icons.account_circle, () {
+              Get.to(CompteSetting());
+            }),
           ],
         ),
       ),
