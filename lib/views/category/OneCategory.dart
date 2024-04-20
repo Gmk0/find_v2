@@ -1,5 +1,6 @@
 import 'package:find_v2/components/bottomNav.dart';
 import 'package:find_v2/controller/ServiceController.dart';
+import 'package:find_v2/controller/categoryController.dart';
 import 'package:find_v2/controller/filtreController.dart';
 import 'package:find_v2/model/categoryMode.dart';
 import 'package:find_v2/utils/theme.dart';
@@ -26,7 +27,7 @@ class _OneCategoryState extends State<OneCategory>
     with TickerProviderStateMixin {
   final ScrollController _scrollController = ScrollController();
   late final AnimationController animationController;
-  final ServiceController serviceController = Get.find();
+  final CategoryController serviceController = Get.find();
   final FilterController filterController = Get.find();
 
   var servicesOhter;

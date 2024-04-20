@@ -1,3 +1,4 @@
+import 'package:find_v2/controller/categoryController.dart';
 import 'package:find_v2/views/freelance/widgets/FiltreScreenFreelance.dart';
 import 'package:find_v2/views/freelance/widgets/ListeViewFreelance.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,7 @@ class _AllFreelanceState extends State<AllFreelance>
     with TickerProviderStateMixin {
   final ScrollController _scrollController = ScrollController();
   late final AnimationController animationController;
-  final ServiceController serviceController = Get.find();
+  final CategoryController serviceController = Get.find();
   final FilterController filterController = Get.find();
 
   var servicesOhter;
