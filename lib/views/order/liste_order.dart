@@ -67,7 +67,6 @@ class _ListeOrderState extends State<ListeOrder> {
           },
         ),
       ),
-      bottomNavigationBar: BottomNav(),
     );
   }
 

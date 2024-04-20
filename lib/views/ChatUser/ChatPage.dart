@@ -1,5 +1,3 @@
-
-
 import 'package:find_v2/components/bottomNav.dart';
 import 'package:find_v2/controller/chatController.dart';
 import 'package:find_v2/views/ChatUser/widget/ChatList.dart';
@@ -17,7 +15,6 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomSheet: BottomNav(),
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(

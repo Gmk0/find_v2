@@ -71,7 +71,6 @@ class _ProfileState extends State<Profile> {
           ),
         ],
       ),
-      bottomNavigationBar: BottomNav(),
     );
   }
 
