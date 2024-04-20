@@ -15,6 +15,8 @@ class CategoryController extends GetxController {
 
   final FilterController filterController = Get.find();
 
+  RxBool isLoadingCategory = false.obs;
+
   @override
   void onInit() {
     fetchAllServices();
@@ -25,6 +27,7 @@ class CategoryController extends GetxController {
 
   Future<void> fetchAllCategory() async {
     try {
+      isLoadingCategory.value = true;
       var url = Uri.parse(
           ApiEndPoints.baseUrl + ApiEndPoints.categoryEndPoints.allCategory);
       http.Response response = await http.get(url);
@@ -37,8 +40,10 @@ class CategoryController extends GetxController {
       } else {
         print('Erreur lors de la récupération des données');
       }
+      isLoadingCategory.value = false;
     } catch (e) {
       print(e.toString());
+      isLoadingCategory.value = false;
     }
   }
 

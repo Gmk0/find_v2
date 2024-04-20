@@ -6,11 +6,11 @@ import 'package:find_v2/views/category/allCategory.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:card_loading/card_loading.dart';
 
-class CategorySwipper extends StatelessWidget {
+class CategorySwipper extends GetView<CategoryController> {
   CategorySwipper({super.key});
 
-  final CategoryController controller = Get.find();
   @override
   Widget build(BuildContext context) {
     String link =
@@ -19,9 +19,16 @@ class CategorySwipper extends StatelessWidget {
     return Obx(
       () {
         if (controller.category.isEmpty) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          ); // Afficher un indicateur de chargement si la liste est vide
+          return CardLoading(
+            height: 100,
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+            margin: EdgeInsets.only(right: 10), // Espacement entre les cartes
+            cardLoadingTheme: CardLoadingTheme(
+              colorOne: Colors.blue,
+              colorTwo: Colors.lightBlue,
+            ),
+          );
+          // Afficher un indicateur de chargement si la liste est vide
         } else {
           return Column(
             children: [
