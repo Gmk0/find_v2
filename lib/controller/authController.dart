@@ -198,7 +198,7 @@ class AuthController extends GetxController {
     // await prefs.remove('tokenKey'); // Remove specific token (replace 'tokenKey' with your actual key)
   }
 
-  void logout() async {
+  Future<void> logout() async {
     try {
       var url =
           Uri.parse(ApiEndPoints.baseUrl + ApiEndPoints.authEndPoints.logout);

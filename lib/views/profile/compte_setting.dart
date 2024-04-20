@@ -62,7 +62,8 @@ class _CompteSettingState extends State<CompteSetting> {
                         .show(context: context, text: "Decoonnexion...");
                     //await Future.delayed(const Duration(seconds: 1));
 
-                    controller.logout();
+                    // ignore: await_only_futures
+                    await controller.logout();
                     LoadingScreen.instance().hide();
                   },
                 ),
